@@ -1,0 +1,50 @@
+.mainText {
+  color: white;
+  font-size: 14px;
+  line-height: 25px;
+  text-align: justify;
+  text-justify: distribute-all-lines;
+  & ::after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0;
+  }
+}
+
+.mainTexts {
+  color: white;
+  font-size: 9px;
+  line-height: 25px;
+  text-align: justify;
+  text-justify: distribute-all-lines;
+  & ::after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0;
+  }
+}
+
+.title1 {
+  color: #F0FE97;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: justify;
+  font-weight: bold;
+  text-justify: distribute-all-lines;
+  & ::after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0;
+  }
+}
+
+.title2 {
+}
+.title3 {
+}

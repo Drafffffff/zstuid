@@ -1,0 +1,89 @@
+$choice-top: 0px;
+
+.nav {
+  margin-top: 50px;
+  .title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    width: 100vw;
+    transform: translateY(-2px);
+  }
+  .select {
+    width: 100%;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .choice {
+      position: absolute;
+    }
+    .gongyesheji {
+      left: 40px;
+      top: calc(148px + $choice-top);
+      animation: bounce-down 4.6s linear infinite;
+    }
+    .jichusheji {
+      left: 150px;
+      top: calc(148px + $choice-top);
+      animation: bounce-down 5s linear infinite;
+    }
+    .shejituxue {
+      right: 29px;
+      top: calc(148px + $choice-top);
+      animation: bounce-down 4s linear infinite;
+    }
+    .yuanxinkongzhi {
+      left: 99px;
+      top: calc(257px + $choice-top);
+      animation: bounce-down 5.2s linear infinite;
+    }
+    .renjigongcheng {
+      right: 85px;
+      top: calc(248px + $choice-top);
+      animation: bounce-down 4.5s linear infinite;
+    }
+  }
+}
+.content {
+  padding: 0 40px;
+  // padding-bottom: 30px;
+  transition: opacity 1s ease-out;
+  opacity: 1;
+  .titles {
+    margin-bottom: 10px;
+  }
+}
+
+.courseDetail {
+  padding: 30px 40px;
+  // display: none;
+  .intro {
+    .titles {
+      margin-bottom: 10px;
+    }
+    margin-bottom: 30px;
+  }
+  .feature {
+    .titles {
+      margin-bottom: 10px;
+    }
+    margin-bottom: 30px;
+  }
+}
+
+@keyframes bounce-down {
+  25% {
+    -webkit-transform: translateY(-4px);
+  }
+  50%,
+  100% {
+    -webkit-transform: translateY(0);
+  }
+  75% {
+    -webkit-transform: translateY(4px);
+  }
+}
+@media only screen and (max-width: 800px) {
+}
