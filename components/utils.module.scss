@@ -4,6 +4,7 @@
   line-height: 25px;
   text-align: justify;
   text-justify: distribute-all-lines;
+  margin-bottom: 10px;
   & ::after {
     content: "";
     width: 100%;
@@ -11,12 +12,16 @@
     overflow: hidden;
     margin: 0;
   }
+  &::selection {
+    background: #fff;
+    color: #000;
+  }
 }
 
 .mainTexts {
   color: white;
   font-size: 9px;
-  line-height: 25px;
+  line-height: 15px;
   text-align: justify;
   text-justify: distribute-all-lines;
   & ::after {
@@ -26,10 +31,14 @@
     overflow: hidden;
     margin: 0;
   }
+  &::selection {
+    background: #fff;
+    color: #000;
+  }
 }
 
 .title1 {
-  color: #F0FE97;
+  color: #f0fe97;
   font-size: 18px;
   line-height: 25px;
   text-align: justify;
@@ -42,9 +51,55 @@
     overflow: hidden;
     margin: 0;
   }
+  &::selection {
+    background: #fff;
+    color: #000;
+  }
 }
 
 .title2 {
+  color: #f0fe97;
+  font-size: 14px;
+  line-height: 25px;
+  text-align: justify;
+  font-weight: bold;
+  text-justify: distribute-all-lines;
+  & ::after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0;
+  }
+  &::selection {
+    background: #fff;
+    color: #000;
+  }
 }
 .title3 {
+}
+
+.card {
+  flex-basis: 45%;
+  .cover {
+    overflow: hidden;
+    height: 180px;
+    width: 100%;
+    position: relative;
+  }
+  .title {
+    margin-top: 5px;
+  }
+  .author {
+    // transform: translateY(-7px);
+  }
+  margin-bottom: 30px;
+
+  .line {
+    background-color: #fff;
+    width: 14.5px;
+    height: 3px;
+    margin-top: 10px;
+    // transform: translateY(-2px);
+  }
 }

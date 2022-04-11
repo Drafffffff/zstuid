@@ -12,16 +12,15 @@ const Navbar = () => {
   const handleMenu = () => () => {
     setIsMenuDisplay(!isMenuDisplay);
     if (isMenuDisplay) {
-      // console.log(menu)
       gsap.to(menu.current, { x: "0" });
-      gsap.to(iconTop.current, { rotation: "45", y:"7.2" });
-      gsap.to(iconMid.current, { opacity: "0" ,duration: 0.2});
+      gsap.to(iconTop.current, { rotation: "45", y: "7.2" });
+      gsap.to(iconMid.current, { opacity: "0", duration: 0.2 });
       gsap.to(iconBtm.current, { rotation: "-45", y: "-7.2" });
-      console.log(iconBtm.current?.clientHeight)
+      console.log(iconBtm.current?.clientHeight);
     } else {
       gsap.to(menu.current, { x: "100%" });
       gsap.to(iconTop.current, { rotation: "0", y: 0 });
-      gsap.to(iconMid.current, { opacity: "100" ,duration: 0.2});
+      gsap.to(iconMid.current, { opacity: "100", duration: 0.2 });
       gsap.to(iconBtm.current, { rotation: "0", y: 0 });
     }
   };
@@ -31,6 +30,7 @@ const Navbar = () => {
         <Image
           src={require("../public/img/navbar/logowithtitle.png")}
           alt="logo"
+          quality={100}
         />
         <div className={styles.links}>
           <Link href={"/"}>
@@ -58,10 +58,12 @@ const Navbar = () => {
           ></Image>
         </div>
       </div>
-      <div
-        className={styles.navbarMobile}
-      >
-        <Image src={require("../public/img/navbar/logoblack.png")} alt="logo" />
+      <div className={styles.navbarMobile}>
+        <Image
+          src={require("../public/img/navbar/logoblack.png")}
+          alt="logo"
+          quality={100}
+        />
         <div className={styles.menubtn} onClick={handleMenu()}>
           <div className={`${styles.line} ${styles.top}`} ref={iconTop}></div>
           <div className={`${styles.line} ${styles.mid}`} ref={iconMid}></div>
@@ -77,6 +79,7 @@ const Navbar = () => {
           <Image
             src={require("../public/img/navbar/Arrowmenu.svg")}
             alt="arrow"
+            quality={100}
           ></Image>
         </div>
         <div className={styles.link}>
