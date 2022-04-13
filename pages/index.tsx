@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   }, [a]);
   return (
     <MainLayout>
-      <div className={styles.aa} ref={a}></div>
+      <div className={styles.aa} ref={a}>asdasdas</div>
     </MainLayout>
   );
 };

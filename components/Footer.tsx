@@ -78,7 +78,6 @@ export default function Footer() {
             <Link href={"/"}>
               <a className={styles.link}>内网接口</a>
             </Link>
-            
           </div>
         </div>
         <div className={styles.info}>
@@ -86,10 +85,11 @@ export default function Footer() {
             <p className={styles.infomation}>
               版权所有2019-2022浙江理工大学 Copyright@2019-2022 ZHEJIANG
               SCI-TECH UNI.All Rights Resloved.
-              <br/>
+            
               <a href="https://beian.miit.gov.cn/"> 浙ICP备000000000号</a>
-              ｜技术支持：
-              <a href="https://drafff.art/">ExchangeReaction</a>
+              <br />
+              Powered by&nbsp;
+              <a href="https://drafff.art/">置换反应&nbsp;ExchangeReaction</a>
             </p>
           </div>
         </div>

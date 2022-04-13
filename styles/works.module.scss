@@ -1,0 +1,25 @@
+// Copyright (c) 2022 drafff
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
+.mobileContainer {
+  margin-top: 20px;
+
+  padding: 0 40px;
+  .content {
+    overflow: hidden;
+  }
+}
+.imgTitle {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.info{
+  margin: 10px 0;
+  margin-bottom: 20px;
+}

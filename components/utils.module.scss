@@ -20,7 +20,7 @@
 
 .mainTexts {
   color: white;
-  font-size: 9px;
+  font-size: 12px;
   line-height: 15px;
   text-align: justify;
   text-justify: distribute-all-lines;
@@ -77,6 +77,49 @@
   }
 }
 .title3 {
+  color: #f0fe97;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: justify;
+  font-weight: bold;
+  text-justify: distribute-all-lines;
+  & ::after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0;
+  }
+  &::selection {
+    background: #fff;
+    color: #000;
+  }
+}
+
+.cardTitle {
+  color: #f0fe97;
+  font-size: 14px;
+  line-height: 20px;
+  // text-align: justify;
+  font-weight: bold;
+  width: 100%;
+  text-justify: distribute-all-lines;
+  height: 40px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-top: 8px;
+  // white-space: nowrap;
+  & ::after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0;
+  }
+  &::selection {
+    background: #fff;
+    color: #000;
+  }
 }
 
 .card {
@@ -91,7 +134,7 @@
     margin-top: 5px;
   }
   .author {
-    // transform: translateY(-7px);
+    margin-top: 8px;
   }
   margin-bottom: 30px;
 
@@ -100,6 +143,47 @@
     width: 14.5px;
     height: 3px;
     margin-top: 10px;
-    // transform: translateY(-2px);
+  }
+}
+
+.pageNav {
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 30px;
+  .prePage {
+    width: 15px;
+    height: 15px;
+  }
+  .pageIcons {
+    display: flex;
+    .pageIcon {
+      width: 30px;
+      height: 30px;
+      border: 1px #bfca79 solid;
+      display: flex;
+      color: rgb(198, 198, 198);
+      justify-content: center;
+      align-items: center;
+      // box-sizing: content-box;
+      // margin: 0 5px;
+    }
+    .pageIconActive {
+      width: 30px;
+      height: 30px;
+      background-color: #f0fe97;
+      color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // box-sizing: content-box;
+      // margin: 0 5px;
+    }
+  }
+  .nextPage {
+    transform: scaleX(-1);
+    width: 15px;
+    height: 15px;
   }
 }
