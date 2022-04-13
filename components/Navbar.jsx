@@ -16,7 +16,6 @@ const Navbar = () => {
       gsap.to(iconTop.current, { rotation: "45", y: "7.2" });
       gsap.to(iconMid.current, { opacity: "0", duration: 0.2 });
       gsap.to(iconBtm.current, { rotation: "-45", y: "-7.2" });
-      console.log(iconBtm.current?.clientHeight);
     } else {
       gsap.to(menu.current, { x: "100%" });
       gsap.to(iconTop.current, { rotation: "0", y: 0 });

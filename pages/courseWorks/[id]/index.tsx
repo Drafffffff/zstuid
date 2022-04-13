@@ -5,15 +5,18 @@ import {
 } from "next";
 import Image from "next/image";
 import MobileLayout from "../../../components/MobileLayout";
-import { MainText, MainTexts, Title1 } from "../../../components/utils";
+import { MainTexts, Title1 } from "../../../components/utils";
 import styles from "../../../styles/works.module.scss";
-import ReactMarkdown from "react-markdown";
 import MobileContent from "../../../components/MobileContent";
 import Head from "next/head";
-import moment from 'moment';
-import "moment/locale/zh-cn"
-moment.locale('zh-cn')
+import moment from "moment";
+import "moment/locale/zh-cn";
+import Like from "../../../components/Likes";
+import { useState } from "react";
+import PreNext from "../../../components/PreNext";
+moment.locale("zh-cn");
 // import * as matter from "gray-matter";
+
 const WorkDetail: NextPage = ({
   id,
   title,
@@ -23,9 +26,20 @@ const WorkDetail: NextPage = ({
   content,
   videourl,
   author,
+  likes,
+  neighber,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const pubilshedTime = moment(published_at);
- 
+  const [likeTimes, setLikeTimes] = useState(likes);
+  async function handleLike() {
+    setLikeTimes(likeTimes + 1);
+    const data = { likes: likeTimes + 1 };
+    await fetch(`http://192.168.1.13:1337/course-works/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    });
+  }
   return (
     <div>
       <Head>
@@ -45,11 +59,18 @@ const WorkDetail: NextPage = ({
             <Title1>{title}</Title1>
           </div>
           <div className={styles.info}>
-            <MainTexts>{`${pubilshedTime.calendar()}　${author}`}</MainTexts>
+            <MainTexts>{`发布于 ${pubilshedTime.calendar()}　${author}`}</MainTexts>
           </div>
           <article className={styles.content}>
             <MobileContent content={content} />
           </article>
+          <Like
+            likeTimes={likeTimes}
+            handleLike={() => {
+              handleLike();
+            }}
+          ></Like>
+          <PreNext neighbor={neighber} urlPre="/courseWorks/"></PreNext>
         </div>
       </MobileLayout>
     </div>
@@ -70,6 +91,37 @@ export const getServerSideProps: GetServerSideProps = async context => {
   const content = data.content;
   const videourl = data.videourl;
   const author = data.author;
+  const likes = data.likes;
+
+  //pre
+  //  /course-works?published_at_gt=2022-04-11T20:02:37.280Z&_sort=published_at:ASC&_limit=1
+  //next
+  // /course-works?published_at_lt=2022-04-12T13:24:09.828Z&_sort=published_at:DESC&_limit=1
+
+  const preUrl = `http://localhost:1337/course-works?published_at_gt=${published_at}&_sort=published_at:ASC&_limit=1`;
+  const nextUrl = `http://localhost:1337/course-works?published_at_lt=${published_at}&_sort=published_at:DESC&_limit=1`;
+  const preData = await (await fetch(preUrl)).json();
+  const nextData = await (await fetch(nextUrl)).json();
+  const neighber = {
+    next:
+      nextData.length === 1
+        ? {
+            id: nextData[0].id,
+            title: nextData[0].title,
+            imageUrl: nextData[0].cover.url,
+          }
+        : null,
+    pre:
+      preData.length === 1
+        ? {
+            id: preData[0].id,
+            title: preData[0].title,
+            imageUrl: preData[0].cover.url,
+          }
+        : null,
+  };
+
+  // console.log(neighber);
   return {
     props: {
       id: id,
@@ -80,6 +132,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
       content: matter(content).content,
       videourl: videourl,
       author: author,
+      likes: likes,
+      neighber: neighber,
     },
   };
 };

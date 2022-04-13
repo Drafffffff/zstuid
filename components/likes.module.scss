@@ -1,0 +1,22 @@
+.likeContainer {
+  display: flex;
+  margin: 20px 0;
+  justify-content: space-between;
+  .share{
+    .shareIcon{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 25px;
+      height: 28px;
+    }
+  }
+  .like {
+    .likeTimes {
+      width: 100%;
+      > div {
+        text-align: center;
+      }
+    }
+  }
+}

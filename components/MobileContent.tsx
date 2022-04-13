@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
 import { FC } from "react";
-import { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { codeHightLight, MainText, tidyUrl } from "./utils";
@@ -32,7 +31,7 @@ const MobileContent: FC<Iprops> = ({ content }) => {
               </code>
             );
           },
-          p: ({ node, children }) => {
+          p: ({ node, children }) =>{
             if (node.children[0].tagName === "img") {
               const image: any = node.children[0];
               return (
@@ -53,9 +52,27 @@ const MobileContent: FC<Iprops> = ({ content }) => {
                   />
                 </div>
               );
+            } else {
+              return <MainText>{children}</MainText>;
             }
-            return <MainText>{children}</MainText>;
-          },
+          }
+            // node.children.map((e,index) => {
+            //   if (e.tagName === "img") {
+            //     const image: any = e;
+            //     return (
+            //       <div className={styles.imageContainer} key={index}>
+            //         <img
+            //           src={`${tidyUrl(image.properties.src)}`}
+            //           alt={image.properties.alt}
+            //           className={styles.image}
+            //         />
+            //       </div>
+            //     );
+            //   } else {
+            //     return <MainText>{children}</MainText>;
+            //   }
+            // }),
+            
           // img: image => {
           //   return (
           //     <img

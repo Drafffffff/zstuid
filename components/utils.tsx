@@ -1,6 +1,7 @@
 import styles from "./utils.module.scss";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
+import Router from "next/router";
 interface IProps {
   children: React.ReactNode;
 }
@@ -32,13 +33,16 @@ interface pageNavProps {
   totalPages: number;
   currentPage: number;
   setPage: Dispatch<SetStateAction<number>>;
+  pathName: string;
 }
 
 export const PageNav: React.FC<pageNavProps> = ({
   totalPages,
   currentPage,
   setPage,
+  pathName,
 }) => {
+  // console.log(currentPage);
   let firstIndex, lastIndex;
   const displayNum = 3;
   if (totalPages <= displayNum * 2 + 1) {
@@ -63,13 +67,20 @@ export const PageNav: React.FC<pageNavProps> = ({
 
   function PrePage() {
     if (currentPage > 1) {
+      gotoPage(currentPage - 1);
       setPage(currentPage - 1);
     }
   }
   function NextPage() {
     if (currentPage < totalPages) {
+      gotoPage(currentPage + 1);
+
       setPage(currentPage + 1);
     }
+  }
+  function gotoPage(n: number) {
+    Router.push({ pathname: pathName, query: { page: n } });
+    setPage(n);
   }
   return (
     <div
@@ -94,11 +105,11 @@ export const PageNav: React.FC<pageNavProps> = ({
           return (
             <div
               className={
-                item === currentPage ? styles.pageIconActive : styles.pageIcon
+                String(item) === String(currentPage) ? styles.pageIconActive : styles.pageIcon
               }
               key={index}
               onClick={() => {
-                setPage(item);
+                gotoPage(item);
               }}
             >
               {item}
@@ -133,7 +144,7 @@ export const codeHightLight = {
     wordSpacing: "normal",
     wordBreak: "normal",
     wordWrap: "normal",
-    lineHeight: "1.5",
+    lineHeight: "1",
     MozTabSize: "4",
     OTabSize: "4",
     tabSize: "4",

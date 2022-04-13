@@ -10,9 +10,9 @@ interface Iprops {
   key: number;
   url:string;
 }
-const MobileCard: FC<Iprops> = ({ imageUrl, title, author, key ,url}) => {
+const MobileCard: FC<Iprops> = ({ imageUrl, title, author ,url}) => {
   return (
-    <Link href={url} key={key}>
+    <Link href={url} >
       <a className={styles.card}>
         <div className={styles.cover}>
           <Image
