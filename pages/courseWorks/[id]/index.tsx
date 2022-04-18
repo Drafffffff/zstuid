@@ -12,7 +12,7 @@ import Head from "next/head";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import Like from "../../../components/Likes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PreNext from "../../../components/PreNext";
 moment.locale("zh-cn");
 // import * as matter from "gray-matter";
@@ -31,6 +31,13 @@ const WorkDetail: NextPage = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const pubilshedTime = moment(published_at);
   const [likeTimes, setLikeTimes] = useState(likes);
+  useEffect(() => {
+    fetch(`http://192.168.1.13:1337/course-works/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        setLikeTimes(data.likes|0);
+      });
+  }, [id]);
   async function handleLike() {
     setLikeTimes(likeTimes + 1);
     const data = { likes: likeTimes + 1 };

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { codeHightLight, MainText, tidyUrl } from "./utils";
@@ -9,6 +9,7 @@ interface Iprops {
   // children: ReactNode;
   content: string;
 }
+
 const MobileContent: FC<Iprops> = ({ content }) => {
   return (
     <div>
@@ -32,7 +33,8 @@ const MobileContent: FC<Iprops> = ({ content }) => {
             );
           },
           p: ({ node, children }) =>{
-            if (node.children[0].tagName === "img") {
+            const cNode:any = node.children[0];
+            if (cNode.tagName === "img") {
               const image: any = node.children[0];
               return (
                 <div className={styles.imageContainer}>

@@ -2,6 +2,8 @@ import styles from "./utils.module.scss";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Image from "next/image";
 import Router from "next/router";
+import style from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
+import MobileContent from "./MobileContent";
 interface IProps {
   children: React.ReactNode;
 }
@@ -105,7 +107,9 @@ export const PageNav: React.FC<pageNavProps> = ({
           return (
             <div
               className={
-                String(item) === String(currentPage) ? styles.pageIconActive : styles.pageIcon
+                String(item) === String(currentPage)
+                  ? styles.pageIconActive
+                  : styles.pageIcon
               }
               key={index}
               onClick={() => {
@@ -520,4 +524,55 @@ export const codeHightLight = {
   ".command-line .command-line-prompt > span:before": {
     color: "#8da1b9da",
   },
+};
+interface TProps {
+  zh: string;
+  en: string;
+}
+export const Titleswe: React.FC<TProps> = ({ zh, en }) => {
+  return (
+    <div>
+      <Title1>{zh}</Title1>
+      <Title1>{en}</Title1>
+    </div>
+  );
+};
+
+export const StudioDirectionM: React.FC<TProps> = ({ zh, en }) => {
+  return (
+    <div className={styles.StudioDirectionContainer}>
+      <div className={styles.StudioDrectionline}></div>
+      <div className={styles.StudioDirectionZh}>{zh}</div>
+      <div className={styles.StudioDirectionEn}>{en}</div>
+    </div>
+  );
+};
+
+interface PersonCardInfo {
+  name: string;
+  describe: string;
+  photoUrl: string;
+}
+
+export const StudioDirectionPersonCardM: React.FC<PersonCardInfo> = ({
+  name,
+  describe,
+  photoUrl,
+}) => {
+  return (
+    <div className={styles.StudioDirectionPersonCardM}>
+      <div className={styles.PersonImage}>
+        <Image
+          src={require("/public/img/studio/person.png")}
+          alt="personImage"
+          layout="fill"
+          objectFit="cover"
+        ></Image>
+      </div>
+      <div className={styles.PersonInfo}>
+        <div className={styles.name}>{name}</div>
+        <div className={styles.describe}>{describe}</div>
+      </div>
+    </div>
+  );
 };

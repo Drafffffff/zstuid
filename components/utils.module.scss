@@ -187,3 +187,49 @@
     height: 15px;
   }
 }
+.StudioDirectionContainer {
+  text-align: right;
+  .StudioDrectionline {
+    border-bottom: 0.5px rgba(255, 255, 255, 0.333) solid;
+  }
+  .StudioDirectionZh {
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .StudioDirectionEn {
+    font-size: 8px;
+    font-weight: lighter;
+    // width:50%;
+  }
+  margin-bottom: 20px;
+}
+
+.StudioDirectionPersonCardM {
+  display: flex;
+  .PersonImage {
+    position: relative;
+    // flex:1;
+    height:168px;
+    width: 240px;
+    // flex-basis: 120px;
+    margin-right: 20px;
+    flex-grow: 2;
+  }
+  .PersonInfo {
+    width: 100%;
+    flex-grow: 1;
+
+    .name {
+      color: #f0fe97;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom:15px;
+    }
+    .describe {
+      font-size: 10px;
+      line-height: 20px;
+      text-align: justify;
+    }
+  }
+  margin-bottom: 30px;
+}
