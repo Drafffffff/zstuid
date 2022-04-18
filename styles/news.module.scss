@@ -1,0 +1,54 @@
+// Copyright (c) 2022 drafff
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+.titleImage {
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.category {
+  position: relative;
+  height: 200px;
+  .tongzhi {
+    position: absolute;
+    left: 49px;
+    top: 0px;
+    animation: bounce-down 3s linear infinite;
+  }
+  .jiangzuo {
+    position: absolute;
+    right: 63px;
+    top: 7px;
+    animation: bounce-down 4.5s linear infinite;
+  }
+  .zhanxun {
+    position: absolute;
+    left: 124px;
+    top: 97px;
+    animation: bounce-down 5s linear infinite;
+  }
+}
+
+.contentTitle {
+  padding: 0 40px;
+  margin-bottom: 20px;
+}
+.contents {
+  padding: 0 40px;
+}
+
+@keyframes bounce-down {
+  25% {
+    -webkit-transform: translateY(-4px);
+  }
+  50%,
+  100% {
+    -webkit-transform: translateY(0);
+  }
+  75% {
+    -webkit-transform: translateY(4px);
+  }
+}

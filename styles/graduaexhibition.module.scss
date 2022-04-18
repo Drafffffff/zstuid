@@ -1,0 +1,27 @@
+.imageTitle {
+  // position: relative;
+  width: 100%;
+  height: 100px;
+  margin-top: 50px;
+}
+.preamble {
+  height: 100vw;
+  width: 100%;
+  position: absolute;
+  top: 80px;
+  z-index: 1;
+}
+.preambleTitle {
+  margin-top: 70vw;
+  padding: 0 40px;
+  position: relative;
+  z-index: 2;
+}
+.graWorksTitle {
+  padding: 0 40px;
+  margin-top: 20px;
+}
+.graWorkTitle{
+  padding: 0 40px;
+  margin-top: 30px;
+}
