@@ -5,6 +5,7 @@
   text-align: justify;
   text-justify: distribute-all-lines;
   margin-bottom: 10px;
+
   & ::after {
     content: "";
     width: 100%;
@@ -12,6 +13,7 @@
     overflow: hidden;
     margin: 0;
   }
+
   &::selection {
     background: #fff;
     color: #000;
@@ -24,6 +26,7 @@
   line-height: 15px;
   text-align: justify;
   text-justify: distribute-all-lines;
+
   & ::after {
     content: "";
     width: 100%;
@@ -31,6 +34,7 @@
     overflow: hidden;
     margin: 0;
   }
+
   &::selection {
     background: #fff;
     color: #000;
@@ -44,6 +48,7 @@
   text-align: justify;
   font-weight: bold;
   text-justify: distribute-all-lines;
+
   & ::after {
     content: "";
     width: 100%;
@@ -51,6 +56,7 @@
     overflow: hidden;
     margin: 0;
   }
+
   &::selection {
     background: #fff;
     color: #000;
@@ -64,6 +70,7 @@
   text-align: justify;
   font-weight: bold;
   text-justify: distribute-all-lines;
+
   & ::after {
     content: "";
     width: 100%;
@@ -71,11 +78,13 @@
     overflow: hidden;
     margin: 0;
   }
+
   &::selection {
     background: #fff;
     color: #000;
   }
 }
+
 .title3 {
   color: #f0fe97;
   font-size: 18px;
@@ -83,6 +92,7 @@
   text-align: justify;
   font-weight: bold;
   text-justify: distribute-all-lines;
+
   & ::after {
     content: "";
     width: 100%;
@@ -90,6 +100,7 @@
     overflow: hidden;
     margin: 0;
   }
+
   &::selection {
     background: #fff;
     color: #000;
@@ -116,6 +127,7 @@
     overflow: hidden;
     margin: 0;
   }
+
   &::selection {
     background: #fff;
     color: #000;
@@ -124,18 +136,22 @@
 
 .card {
   flex-basis: 45%;
+
   .cover {
     overflow: hidden;
     height: 180px;
     width: 100%;
     position: relative;
   }
+
   .title {
     margin-top: 5px;
   }
+
   .author {
     margin-top: 8px;
   }
+
   margin-bottom: 30px;
 
   .line {
@@ -152,12 +168,15 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 30px;
+
   .prePage {
     width: 15px;
     height: 15px;
   }
+
   .pageIcons {
     display: flex;
+
     .pageIcon {
       width: 30px;
       height: 30px;
@@ -169,6 +188,7 @@
       // box-sizing: content-box;
       // margin: 0 5px;
     }
+
     .pageIconActive {
       width: 30px;
       height: 30px;
@@ -181,40 +201,48 @@
       // margin: 0 5px;
     }
   }
+
   .nextPage {
     transform: scaleX(-1);
     width: 15px;
     height: 15px;
   }
 }
+
 .StudioDirectionContainer {
   text-align: right;
+
   .StudioDrectionline {
     border-bottom: 0.5px rgba(255, 255, 255, 0.333) solid;
   }
+
   .StudioDirectionZh {
     font-size: 12px;
     font-weight: bold;
   }
+
   .StudioDirectionEn {
     font-size: 8px;
     font-weight: lighter;
     // width:50%;
   }
+
   margin-bottom: 20px;
 }
 
 .StudioDirectionPersonCardM {
   display: flex;
+
   .PersonImage {
     position: relative;
     // flex:1;
-    height:168px;
+    height: 168px;
     width: 240px;
     // flex-basis: 120px;
     margin-right: 20px;
     flex-grow: 2;
   }
+
   .PersonInfo {
     width: 100%;
     flex-grow: 1;
@@ -223,13 +251,19 @@
       color: #f0fe97;
       font-size: 12px;
       font-weight: bold;
-      margin-bottom:15px;
+      margin-bottom: 15px;
     }
+
     .describe {
       font-size: 10px;
       line-height: 20px;
       text-align: justify;
     }
   }
+
   margin-bottom: 30px;
+}
+
+.bilibili {
+  margin: 30px 0;
 }

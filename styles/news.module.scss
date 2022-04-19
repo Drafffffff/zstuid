@@ -4,9 +4,7 @@
 // https://opensource.org/licenses/MIT
 .titleImage {
   margin-top: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }
 
 .category {
@@ -15,7 +13,7 @@
   .tongzhi {
     position: absolute;
     left: 49px;
-    top: 0px;
+    top: 0;
     animation: bounce-down 3s linear infinite;
   }
   .jiangzuo {

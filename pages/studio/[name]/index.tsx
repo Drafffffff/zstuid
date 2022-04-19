@@ -143,7 +143,6 @@ export const getServerSideProps: GetServerSideProps = async context => {
             cover: a.cover,
             url: `/studio/${key}/${a.id}`,
         }));
-        console.log(works)
         return {
             props: {
                 describe: describe,

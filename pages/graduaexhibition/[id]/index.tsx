@@ -5,8 +5,8 @@ import {
 } from "next";
 import Image from "next/image";
 import MobileLayout from "../../../components/MobileLayout";
-import {MainTexts, Title1} from "../../../components/utils";
-import styles from "../../../styles/works.module.scss";
+import {BilibiliVideo, MainTexts, Title1} from "../../../components/utils";
+import styles from "../../../styles/graduaexhibition.module.scss";
 import MobileContent from "../../../components/MobileContent";
 import Head from "next/head";
 import moment from "moment";
@@ -14,6 +14,7 @@ import "moment/locale/zh-cn";
 import Like from "../../../components/Likes";
 import {useEffect, useState} from "react";
 import PreNext from "../../../components/PreNext";
+import GraduationP52022 from "../../../components/2022graduationP5";
 
 moment.locale("zh-cn");
 // import * as matter from "gray-matter";
@@ -59,9 +60,12 @@ const WorkDetail: NextPage = ({
             <MobileLayout>
                 <div className={styles.imgTitle}>
                     <Image
-                        src={require("/public/img/news/imageTitle.png")}
+                        src={require("/public/img/graduaexhibition/imageTitle.svg")}
                         alt={"imageTitle"}
                     />
+                </div>
+                <div className={styles.preamble}>
+                    <GraduationP52022  />
                 </div>
                 <div className={styles.mobileContainer}>
                     <div className={styles.title}>
@@ -73,6 +77,10 @@ const WorkDetail: NextPage = ({
                     <article className={styles.content}>
                         <MobileContent content={content}/>
                     </article>
+
+                    <div className={styles.video} style={{display: videourl === null ? "none" : "block"}}>
+                        <BilibiliVideo bv={videourl}/>
+                    </div>
                     <Like
                         likeTimes={likeTimes}
                         handleLike={() => {

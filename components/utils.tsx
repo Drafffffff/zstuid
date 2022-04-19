@@ -4,6 +4,7 @@ import Image from "next/image";
 import Router from "next/router";
 import style from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
 import MobileContent from "./MobileContent";
+import exp from "constants";
 
 interface IProps {
     children: React.ReactNode;
@@ -548,7 +549,7 @@ export const Titleswe: React.FC<TProps> = ({zh, en}) => {
 export const StudioDirectionM: React.FC<TProps> = ({zh, en}) => {
     return (
         <div className={styles.StudioDirectionContainer}>
-            <div className={styles.StudioDrectionline}></div>
+            <div className={styles.StudioDrectionline}/>
             <div className={styles.StudioDirectionZh}>{zh}</div>
             <div className={styles.StudioDirectionEn}>{en}</div>
         </div>
@@ -583,3 +584,16 @@ export const StudioDirectionPersonCardM: React.FC<PersonCardInfo> = ({
         </div>
     );
 };
+
+interface VideoProps{
+bv:string
+}
+export const BilibiliVideo:React.FC<VideoProps> =({bv})=>{
+    return (
+  <div className={styles.bilibili}>
+
+      <iframe src={`//player.bilibili.com/player.html?bvid=${bv}&page=1&as_wide=1&high_quality=1&danmaku=0`}
+              scrolling="no"  frameBorder="no"  allowFullScreen={true}/>
+  </div>
+    )
+}

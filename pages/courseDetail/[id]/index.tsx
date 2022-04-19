@@ -172,7 +172,6 @@ export const getServerSideProps: GetServerSideProps = async context => {
     const key = context.params?.id as keyof cd;
     const content = data[key];
     const currentPage = context.query.page || "1";
-    console.log(currentPage);
     const feature = content.feature;
     const intro = content.intro;
     const imageUrl = content.cover.url;
