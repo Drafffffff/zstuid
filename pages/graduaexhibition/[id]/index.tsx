@@ -4,37 +4,35 @@ import {
     NextPage,
 } from "next";
 import Image from "next/image";
-import MobileLayout from "../../../../components/MobileLayout";
-import {MainTexts, tidyUrl, Title1} from "../../../../components/utils";
-import styles from "../../../../styles/works.module.scss";
-import MobileContent from "../../../../components/MobileContent";
+import MobileLayout from "../../../components/MobileLayout";
+import {MainTexts, Title1} from "../../../components/utils";
+import styles from "../../../styles/works.module.scss";
+import MobileContent from "../../../components/MobileContent";
 import Head from "next/head";
 import moment from "moment";
 import "moment/locale/zh-cn";
-import Like from "../../../../components/Likes";
+import Like from "../../../components/Likes";
 import {useEffect, useState} from "react";
-import PreNext from "../../../../components/PreNext";
+import PreNext from "../../../components/PreNext";
 
 moment.locale("zh-cn");
 // import * as matter from "gray-matter";
 
-const StudioWorks: NextPage = ({
+const WorkDetail: NextPage = ({
                                   id,
                                   title,
                                   published_at,
-                                  news_category,
                                   discribe,
                                   content,
                                   videourl,
                                   author,
                                   likes,
                                   neighber,
-                                   titleImage
                               }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const pubilshedTime = moment(published_at);
     const [likeTimes, setLikeTimes] = useState(likes);
     useEffect(() => {
-        fetch(`http://192.168.1.13:1337/studio-works/${id}`)
+        fetch(`http://192.168.1.13:1337/graduation-works/${id}`)
             .then(res => res.json())
             .then(data => {
                 setLikeTimes(data.likes | 0);
@@ -44,7 +42,7 @@ const StudioWorks: NextPage = ({
     async function handleLike() {
         setLikeTimes(likeTimes + 1);
         const data = {likes: likeTimes + 1};
-        await fetch(`http://192.168.1.13:1337/studio-works/${id}`, {
+        await fetch(`http://192.168.1.13:1337/graduation-works/${id}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {"Content-Type": "application/json"},
@@ -61,10 +59,8 @@ const StudioWorks: NextPage = ({
             <MobileLayout>
                 <div className={styles.imgTitle}>
                     <Image
-                        src={tidyUrl(titleImage)}
+                        src={require("/public/img/news/imageTitle.png")}
                         alt={"imageTitle"}
-                        width={390}
-                        height={95}
                     />
                 </div>
                 <div className={styles.mobileContainer}>
@@ -94,12 +90,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     // Fetch data from external API
     const matter = require("gray-matter");
     const pageid = context.params?.id;
-    const pagename = context.params?.name as string;
-    const titleImageres = await fetch("http://127.0.0.1:1337/studio");
-    const titleImageData = await titleImageres.json();
-    // console.log(titleImageData[pagename].cover.url)
-    const titleImage = titleImageData[pagename].cover.url;
-    const res = await fetch(`http://localhost:1337/studio-works/${pageid}`);
+    const res = await fetch(`http://localhost:1337/graduation-works/${pageid}`);
     const data = await res.json();
     const id = data.id;
     const title = data.title;
@@ -110,13 +101,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     const videourl = data.videoUrl;
     const author = data.author;
     const likes = data.likes;
-    //pre
-    //  /course-works?published_at_gt=2022-04-11T20:02:37.280Z&_sort=published_at:ASC&_limit=1
-    //next
-    // /course-works?published_at_lt=2022-04-12T13:24:09.828Z&_sort=published_at:DESC&_limit=1
 
-    const preUrl = `http://localhost:1337/studio-works?published_at_gt=${published_at}&_sort=published_at:ASC&_limit=1`;
-    const nextUrl = `http://localhost:1337/studio-works?published_at_lt=${published_at}&_sort=published_at:DESC&_limit=1`;
+    const preUrl = `http://localhost:1337/graduation-works?published_at_gt=${published_at}&_sort=published_at:ASC&_limit=1`;
+    const nextUrl = `http://localhost:1337/graduation-works?published_at_lt=${published_at}&_sort=published_at:DESC&_limit=1`;
     const preData = await (await fetch(preUrl)).json();
     const nextData = await (await fetch(nextUrl)).json();
     const neighber = {
@@ -151,9 +138,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
             author: author,
             likes: likes,
             neighber: neighber,
-            titleImage:titleImage
         },
     };
 };
 
-export default StudioWorks;
+export default WorkDetail;

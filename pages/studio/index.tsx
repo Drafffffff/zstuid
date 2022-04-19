@@ -37,7 +37,7 @@ const Studio: NextPage = () => {
                         alt="imageTitle"
                         height={95}
                         width={391}
-                    ></Image>
+                    />
                 </div>
                 <div className={styles.categories}>
                     <div className={styles.fwsjyshcx}>
@@ -48,7 +48,7 @@ const Studio: NextPage = () => {
                                     alt="fwsjyshcx"
                                     height={120}
                                     width={120}
-                                ></Image>
+                                />
                             </a>
                         </Link>
                     </div>
@@ -60,7 +60,7 @@ const Studio: NextPage = () => {
                                     alt="szwc"
                                     height={120}
                                     width={120}
-                                ></Image>
+                                />
                             </a>
                         </Link>
                     </div>
@@ -72,7 +72,7 @@ const Studio: NextPage = () => {
                                     alt="kcxsj"
                                     height={120}
                                     width={120}
-                                ></Image>
+                                />
                             </a>
                         </Link>
                     </div>
@@ -84,7 +84,7 @@ const Studio: NextPage = () => {
                                     alt="jjsj"
                                     height={120}
                                     width={120}
-                                ></Image>
+                                />
                             </a>
                         </Link>
                     </div>
@@ -96,13 +96,13 @@ const Studio: NextPage = () => {
                                     alt="qdyjs"
                                     height={120}
                                     width={120}
-                                ></Image>
+                                />
                             </a>
                         </Link>
                     </div>
                 </div>
                 <div className={styles.overviewTitles}>
-                    <Titleswe zh="工作室概览" en="Studio Overview"></Titleswe>
+                    <Titleswe zh="工作室概览" en="Studio Overview"/>
                 </div>
                 <div className={styles.overview}>
                     <MainText>
@@ -110,9 +110,9 @@ const Studio: NextPage = () => {
                     </MainText>
                 </div>
                 <div className={styles.resultsTitle}>
-                    <Titleswe zh="现有成果" en="On-going results"></Titleswe>
+                    <Titleswe zh="现有成果" en="On-going results"/>
                 </div>
-                <div className={styles.results}></div>
+                <div className={styles.results}/>
             </MobileLayout>
         </div>
     );
