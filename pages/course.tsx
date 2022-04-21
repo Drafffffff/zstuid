@@ -19,8 +19,10 @@ const Course: NextPage = () => {
                 <div className={styles.nav}>
                     <div className={styles.title}>
                         <Image
-                            src={require("../public/img/course/title.svg")}
+                            src={require("../public/img/course/title.png")}
                             alt="title"
+                            width={390}
+                            height={95}
                         />
                     </div>
                     <div className={styles.select}>

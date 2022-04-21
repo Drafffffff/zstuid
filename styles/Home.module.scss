@@ -1,20 +1,41 @@
-.aa {
+.mainGraph {
+  height: 500px;
+}
+
+.swipper {
   width: 100%;
-  height: 600px;
-  background-color: #fff;
+  margin-bottom: 40px;
+
 }
 
 .history {
   padding: 0 40px;
+  height: 700px;
+
+  .title {
+    margin-bottom: 40px;
+  }
 }
+
 .feature {
   padding: 0 40px;
 }
+
 .honor {
   padding: 0 40px;
+
+  .honorImg {
+    width: 100%;
+    position: relative;
+    height: 200px;
+    margin-bottom: 20px;
+  }
 }
+
 .talent {
   padding: 0 40px;
+  margin-bottom: 40px;
 }
+
 @media (max-width: 800px) {
 }

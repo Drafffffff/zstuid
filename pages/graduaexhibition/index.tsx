@@ -65,7 +65,7 @@ const Index: NextPage = ({
                         totalPages={totalPagesCount}
                         currentPage={currentPage}
                         setPage={SetCurrentPage}
-                        pathName={`/news/tongzhi`}
+                        pathName={`/graduaexhibition`}
                     />
                 </div>
             </MobileLayout>
@@ -75,7 +75,7 @@ const Index: NextPage = ({
 export const getServerSideProps: GetServerSideProps = async context => {
     const res = await fetch(`http://127.0.0.1:1337/graduation-works`);
     const data = await res.json();
-    // console.log(data);
+    console.log(data);
     const works = data.map((a: any) => ({
         title: a.title,
         published_at: a.published_at,

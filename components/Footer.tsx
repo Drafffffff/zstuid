@@ -85,7 +85,6 @@ export default function Footer() {
                         <p className={styles.infomation}>
                             版权所有2019-2022浙江理工大学 Copyright@2019-2022 ZHEJIANG
                             SCI-TECH UNI.All Rights Resloved.
-
                             <a href="https://beian.miit.gov.cn/"> 浙ICP备000000000号</a>
                             <br/>
                             Powered by&nbsp;

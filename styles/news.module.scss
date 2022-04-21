@@ -7,21 +7,29 @@
   text-align: center;
 }
 
+.swipper {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
 .category {
   position: relative;
   height: 200px;
+
   .tongzhi {
     position: absolute;
     left: 49px;
     top: 0;
     animation: bounce-down 3s linear infinite;
   }
+
   .jiangzuo {
     position: absolute;
     right: 63px;
     top: 7px;
     animation: bounce-down 4.5s linear infinite;
   }
+
   .zhanxun {
     position: absolute;
     left: 124px;
@@ -34,6 +42,7 @@
   padding: 0 40px;
   margin-bottom: 20px;
 }
+
 .contents {
   padding: 0 40px;
 }

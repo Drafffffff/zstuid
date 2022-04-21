@@ -71,9 +71,9 @@ const GraduationP52022: React.FC<ComponentProps> = (props) => {
         p5.stroke(240, 254, 151);
         p5.strokeWeight(0.5);
         p5.translate(0, 0, zpos - 1);
-        p5.line(-width / 2, -width / 2, 0, width * 0.1, width * 0.1, 0)
-        p5.line(-width / 2, width / 2, 0, width * 0.06, -width * 0.06, 0)
-        p5.strokeWeight(0.1);
+        p5.line(-width / 2 + width / 3, -width / 2 + width / 3, 0, width * 0.1, width * 0.1, 0)
+        p5.line(-width / 2 + width / 3, width / 2 - width / 3, 0, width * 0.06, -width * 0.06, 0)
+        p5.strokeWeight(0.2);
 
         p5.line(0, -width * 0.15, 0, 0, width * 0.15, 0)
         p5.line(-width * 0.15, 0, 0, width * 0.15, 0, 0)

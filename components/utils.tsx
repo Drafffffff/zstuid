@@ -1,10 +1,16 @@
 import styles from "./utils.module.scss";
-import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 import Image from "next/image";
 import Router from "next/router";
-import style from "react-syntax-highlighter/dist/esm/styles/hljs/a11y-dark";
-import MobileContent from "./MobileContent";
-import exp from "constants";
+import {gsap} from "gsap";
+import dynamic from 'next/dynamic'
+
+import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {useWindowSize} from "usehooks-ts";
+import CustomEase from "gsap/CustomEase";
+
+// declare var CustomEase: { create: (arg0: string, arg1: string) => any; };
+// const {ScrollTrigger} = dynamic(import("gsap/ScrollTrigger"), {ssr: false})
 
 interface IProps {
     children: React.ReactNode;
@@ -106,7 +112,7 @@ export const PageNav: React.FC<pageNavProps> = ({
                     alt="prePage"
                     width={15}
                     height={16}
-                ></Image>
+                />
             </div>
             <div className={styles.pageIcons}>
                 {pageArray.map((item, index) => {
@@ -138,7 +144,7 @@ export const PageNav: React.FC<pageNavProps> = ({
                     alt="NextPage"
                     width={15}
                     height={16}
-                ></Image>
+                />
             </div>
         </div>
     );
@@ -585,15 +591,361 @@ export const StudioDirectionPersonCardM: React.FC<PersonCardInfo> = ({
     );
 };
 
-interface VideoProps{
-bv:string
+interface VideoProps {
+    bv: string
 }
-export const BilibiliVideo:React.FC<VideoProps> =({bv})=>{
-    return (
-  <div className={styles.bilibili}>
 
-      <iframe src={`//player.bilibili.com/player.html?bvid=${bv}&page=1&as_wide=1&high_quality=1&danmaku=0`}
-              scrolling="no"  frameBorder="no"  allowFullScreen={true}/>
-  </div>
+export const BilibiliVideo: React.FC<VideoProps> = ({bv}) => {
+    return (
+        <div className={styles.bilibili}>
+
+            <iframe src={`//player.bilibili.com/player.html?bvid=${bv}&page=1&as_wide=1&high_quality=1&danmaku=0`}
+                    scrolling="no" frameBorder="no" allowFullScreen={true}/>
+        </div>
     )
+}
+
+interface TalentConatent {
+    title: string,
+    content: string
+}
+
+interface TalentProps {
+    talents: TalentConatent[]
+}
+
+export const Talent: React.FC<TalentProps> = ({talents}) => {
+    return (
+        <div className={styles.talent}>
+            {talents.map((talentItem, index) => (
+                <div key={index}>
+                    <div className={styles.title}>{talentItem.title}</div>
+                    <div
+                        className={styles.content}>
+                        {talentItem.content}
+                    </div>
+                </div>
+            ))}
+        </div>
+    )
+}
+
+
+interface FeatureProps {
+    content: string[]
+}
+
+export const Features: React.FC<FeatureProps> = ({content}) => {
+    gsap.registerPlugin(ScrollTrigger);
+    const box = useWindowSize()
+    const ref = useRef(null);
+    const itemsRef = useRef([])
+    const textitemsRef = useRef([])
+    useEffect(() => {
+        itemsRef.current = itemsRef.current.slice(0, content.length);
+        const width = box.width
+        const element = ref.current;
+        gsap.set(element, {x: 500})
+        gsap.to(element, {
+            scrollTrigger: {
+                trigger: element,
+                toggleActions: "restart pause reverse none",
+                // markers: true,
+                scrub: 0.5,
+                start: "center 87%",
+                end: "+=150"
+            },
+            x: 0,
+            duration: 3
+        });
+
+        itemsRef.current.map((e) => {
+            gsap.set(e, {x: 500})
+            gsap.to(e, {
+                scrollTrigger: {
+                    trigger: e,
+                    toggleActions: "restart pause reverse none",
+                    // markers: true,
+                    scrub: 0.5,
+                    start: "center 87%",
+                    end: "+=150"
+                },
+                x: 0,
+                duration: 3
+            });
+        })
+
+        textitemsRef.current.map((e) => {
+            gsap.set(e, {opacity: 0})
+            gsap.to(e, {
+                scrollTrigger: {
+                    trigger: e,
+                    toggleActions: "restart pause reverse none",
+                    // markers: true,
+                    scrub: 0.5,
+                    start: "center 87%",
+                    end: "+=150"
+                },
+                opacity: 1,
+                duration: 3
+            });
+        })
+    }, [content])
+    return (
+        <div className={styles.features}>
+
+            <div className={styles.top}>
+                <div className={styles.circle} ref={ref}/>
+            </div>
+            {content.map((e, i) => {
+                return (<div className={styles.feature} key={i}>
+                    <div className={styles.circle} ref={
+                        // @ts-ignore
+                        el => itemsRef.current[i] = el}/>
+                    <div className={styles.content} ref={
+                        // @ts-ignore
+                        el => textitemsRef.current[i] = el}>
+                        {e}
+                    </div>
+                </div>)
+            })}
+
+        </div>
+    )
+}
+
+
+const constrain = (n: number, low: number, high: number) => {
+    return Math.max(Math.min(n, high), low);
+};
+
+
+const map = (n: number, start1: number, stop1: number, start2: number, stop2: number, withinBounds: boolean) => {
+    const newval = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
+    if (!withinBounds) {
+        return newval;
+    }
+    if (start2 < stop2) {
+        return constrain(newval, start2, stop2);
+    } else {
+        return constrain(newval, stop2, start2);
+    }
+};
+
+export const History = () => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(CustomEase)
+    const data = [
+        {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        }, {
+            year: "1996",
+            event_: 'sdfsdf'
+        },
+    ]
+    const yearsRef = useRef([])
+    const eventsRef = useRef([])
+    const timelineCurse = useRef(null)
+    const linesRef = useRef([])
+    useEffect(() => {
+        const element = timelineCurse.current
+        const timelineCurseAnime = gsap.to(element, {
+            scrollTrigger: {
+                trigger: element,
+                toggleActions: "restart pause reverse none",
+                // markers: true,
+                scrub: 0.2,
+                start: "center 50%",
+                end: "+=500"
+            },
+            y: 500,
+            duration: 1,
+            ease: "none"
+        });
+
+        const yearsAnime = gsap.to(yearsRef.current, {
+            stagger: 0.5,
+            // delay: 0.5,
+            duration: 1,
+            x: -100,
+            color: "#f0fe97",
+            scale: 2,
+            ease: CustomEase.create("custom", "M0,0,C0,0,0.198,1,0.5,1,0.8,1,1,0,1,0"),
+            paused: true
+        })
+        const eventsAnime = gsap.to(eventsRef.current, {
+            stagger: 0.5,
+            scale: 2,
+            duration: 1,
+            color: "#f0fe97",
+            ease: CustomEase.create("custom", "M0,0,C0,0,0.198,1,0.5,1,0.8,1,1,0,1,0"),
+            x: 100,
+            paused: true
+        })
+
+
+        const linesAnime = gsap.to(linesRef.current, {
+            stagger: 0.23,
+            delay: 0.5,
+            duration: 1.6,
+            x: 18,
+            ease: CustomEase.create("custom", "M0,0,C0,0,0.198,1,0.5,1,0.8,1,1,0,1,0"),
+            paused: true,
+            yoyo: true
+        })
+        linesAnime.progress(0.05)
+        timelineCurseAnime.eventCallback("onUpdate", () => {
+            const t = timelineCurseAnime.time();
+            const tt = map(t, 0, 1, 0.05, 0.95, true);
+            linesAnime.totalProgress(tt, true)
+            yearsAnime.progress(t, true)
+            eventsAnime.progress(t, true)
+        })
+    }, [])
+    return (
+        <div className={styles.history}>
+            <div className={styles.timeLine}>
+                <div className={styles.timelineCursor} ref={timelineCurse}/>
+                <div className={styles.lines}>
+                    {data.map((e, i) => {
+                        const index = i * 5
+                        return (
+                            <div key={i} className={styles.unit}>
+                                <div className={styles.year} ref={
+                                    // @ts-ignore
+                                    el => yearsRef.current[i] = el}>{e.year}</div>
+                                <div className={styles.event} ref={
+                                    // @ts-ignore
+                                    el => eventsRef.current[i] = el}>{e.event_}</div>
+                                <div className={styles.lineL} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index] = el}/>
+                                <div className={styles.line} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 1] = el}/>
+                                <div className={styles.line} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 2] = el}/>
+                                <div className={styles.line} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 3] = el}/>
+                                <div className={styles.line} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 4] = el}/>
+                                <div className={styles.line} style={{backgroundColor: "#000"}}/>
+
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+interface bannerProps {
+    bannerData: any
+}
+
+
+export const BannerM: React.FC<bannerProps> = ({bannerData}) => {
+    const top = useRef(null)
+    const bottom = useRef(null)
+    const left = useRef(null)
+    const right = useRef(null)
+    let count = 0;
+    useEffect(() => {
+        gsap.defaults({
+            ease: "power2.out",
+            duration: 0.8
+        });
+        const intervalId = setInterval(() => {
+            if (count >= 2) {
+                count = 0
+            } else {
+                count++
+            }
+            if (count === 0) {
+                gsap.to(left.current, {
+                    flexBasis: "90%"
+                });
+                gsap.to(top.current, {
+                    flexBasis: "90%"
+                });
+            } else if (count === 1) {
+                gsap.to(left.current, {
+                    flexBasis: "90%"
+                });
+                gsap.to(top.current, {
+                    flexBasis: "8%"
+                });
+            } else if (count === 2) {
+                gsap.to(left.current, {
+                    flexBasis: "5%"
+                });
+            }
+            console.log(tidyUrl(bannerData.bannerItem1.coverUrl))
+        }, 3000)
+        return () => clearInterval(intervalId);
+    }, [])
+
+    const handleClick = (url: string) => {
+        window.location.href = url
+    }
+    return (
+        <div className={styles.bannerContainer}>
+            <div className={styles.left} ref={left}>
+                <div className={styles.top}
+                     style={{backgroundImage: `url(${tidyUrl(bannerData.bannerItem1.coverUrl)})`}} ref={top}
+                     onClick={() => {
+                         handleClick(bannerData.bannerItem1.url)
+                     }}/>
+                <div className={styles.bottom}
+                     style={{backgroundImage: `url(${tidyUrl(bannerData.bannerItem2.coverUrl)})`}} ref={bottom}
+                     onClick={() => {
+                         handleClick(bannerData.bannerItem2.url)
+                     }}/>
+            </div>
+            <div className={styles.right}>
+                <div className={styles.right}
+                     style={{backgroundImage: `url(${tidyUrl(bannerData.bannerItem3.coverUrl)})`}} ref={right}
+                     onClick={() => {
+                         handleClick(bannerData.bannerItem3.url)
+                     }}/>
+            </div>
+        </div>)
 }

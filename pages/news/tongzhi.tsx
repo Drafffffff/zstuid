@@ -10,12 +10,13 @@ import styles from "../../styles/news.module.scss";
 import MainLayout from "../../components/MainLayout";
 import MobileLayout from "../../components/MobileLayout";
 import Link from "next/link";
-import {PageNav, Titleswe} from "../../components/utils";
+import {BannerM, PageNav, Titleswe} from "../../components/utils";
 import {useState} from "react";
 import MobileCards from "../../components/MobileCards";
 
 const News: NextPage = ({
                             news,
+    banner
                         }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [currentPage, SetCurrentPage] = useState(1);
     const ItemPerPage = 12;
@@ -36,7 +37,9 @@ const News: NextPage = ({
                         width={390}
                     />
                 </div>
-                <div className={styles.swipper}/>
+                <div className={styles.swipper}>
+                    <BannerM bannerData={banner}/>
+                </div>
                 <div className={styles.contentTitle}>
                     <Titleswe zh="通知" en="Notice"/>
                 </div>
@@ -62,6 +65,22 @@ const News: NextPage = ({
 export const getServerSideProps: GetServerSideProps = async context => {
     const res = await fetch(`http://127.0.0.1:1337/news-centers?news_category=2`);
     const data = await res.json();
+    const bannerRes = await fetch(`http://127.0.0.1:1337/news-banner`);
+    const bannerData = await bannerRes.json()
+    const banner = {
+        bannerItem1: {
+            url: bannerData["tongzhi"]["bannerItems1"].url,
+            coverUrl: bannerData["tongzhi"]["bannerItems1"].cover.url
+        },
+        bannerItem2: {
+            url: bannerData["tongzhi"]["bannerItmes2"].url,
+            coverUrl: bannerData["tongzhi"]["bannerItmes2"].cover.url
+        },
+        bannerItem3: {
+            url: bannerData["tongzhi"]["bannerItem3"].url,
+            coverUrl: bannerData["tongzhi"]["bannerItem3"].cover.url
+        },
+    }
     // console.log(data);
     const news = data.map((a: any) => ({
         title: a.title,
@@ -74,6 +93,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     return {
         props: {
             news: news,
+            banner:banner
         },
     };
 };

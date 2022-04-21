@@ -87,7 +87,7 @@ const WorkDetail: NextPage = ({
                             handleLike().then(r => null);
                         }}
                     />
-                    <PreNext neighbor={neighber} urlPre="/news/"/>
+                    <PreNext neighbor={neighber} urlPre="/graduaexhibition/"/>
                 </div>
             </MobileLayout>
         </div>

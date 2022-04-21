@@ -11,6 +11,8 @@
 }
 .mobileContainer {
   width: 100%;
+  overflow: hidden;
+
   // height: 2000px;
   display: none;
   background-image: url("../public/img/utils/bgGrid.png");

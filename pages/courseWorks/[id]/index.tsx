@@ -62,6 +62,8 @@ const WorkDetail: NextPage = ({
                     <Image
                         src={require("/public/img/works/workstitle.png")}
                         alt={"imageTitle"}
+                        width={390}
+                        height={95}
                     />
                 </div>
                 <div className={styles.mobileContainer}>
@@ -80,7 +82,7 @@ const WorkDetail: NextPage = ({
                     <Like
                         likeTimes={likeTimes}
                         handleLike={() => {
-                            handleLike();
+                            handleLike().then(r => null);
                         }}
                     />
                     <PreNext neighbor={neighber} urlPre="/courseWorks/"/>
