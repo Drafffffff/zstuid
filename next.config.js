@@ -6,7 +6,7 @@ const nextConfig = {
         includePaths: [path.join(__dirname, "styles")],
     },
     images: {
-        domains: ["127.0.0.1", "localhost", "192.168.1.13"],
+        domains: ["127.0.0.1", "localhost", "192.168.1.4"],
     },
     typescript: {
         // !! WARN !!
@@ -15,6 +15,7 @@ const nextConfig = {
         // !! WARN !!
         // ignoreBuildErrors: true,
     },
+    swcMinify: false
 };
 
 const withTM = require("next-transpile-modules")(["gsap"]);

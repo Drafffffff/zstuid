@@ -5,7 +5,7 @@ import {
 } from "next";
 import Image from "next/image";
 import MobileLayout from "../../../components/MobileLayout";
-import {BilibiliVideo, MainTexts, Title1} from "../../../components/utils";
+import {BilibiliVideo, LOCAL_URL, MainTexts, Title1} from "../../../components/utils";
 import styles from "../../../styles/works.module.scss";
 import MobileContent from "../../../components/MobileContent";
 import Head from "next/head";
@@ -33,7 +33,7 @@ const WorkDetail: NextPage = ({
     const pubilshedTime = moment(published_at);
     const [likeTimes, setLikeTimes] = useState(likes);
     useEffect(() => {
-        fetch(`http://192.168.1.13:1337/news-centers/${id}`)
+        fetch(`http://${LOCAL_URL}:1337/news-centers/${id}`)
             .then(res => res.json())
             .then(data => {
                 setLikeTimes(data.likes | 0);
@@ -43,7 +43,7 @@ const WorkDetail: NextPage = ({
     async function handleLike() {
         setLikeTimes(likeTimes + 1);
         const data = {likes: likeTimes + 1};
-        await fetch(`http://192.168.1.13:1337/news-centers/${id}`, {
+        await fetch(`http://${LOCAL_URL}:1337/news-centers/${id}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {"Content-Type": "application/json"},

@@ -5,7 +5,7 @@ import {
 } from "next";
 import Image from "next/image";
 import MobileLayout from "../../../../components/MobileLayout";
-import {MainTexts, tidyUrl, Title1} from "../../../../components/utils";
+import {LOCAL_URL, MainTexts, tidyUrl, Title1} from "../../../../components/utils";
 import styles from "../../../../styles/works.module.scss";
 import MobileContent from "../../../../components/MobileContent";
 import Head from "next/head";
@@ -19,22 +19,22 @@ moment.locale("zh-cn");
 // import * as matter from "gray-matter";
 
 const StudioWorks: NextPage = ({
-                                  id,
-                                  title,
-                                  published_at,
-                                  news_category,
-                                  discribe,
-                                  content,
-                                  videourl,
-                                  author,
-                                  likes,
-                                  neighber,
+                                   id,
+                                   title,
+                                   published_at,
+                                   news_category,
+                                   discribe,
+                                   content,
+                                   videourl,
+                                   author,
+                                   likes,
+                                   neighber,
                                    titleImage
-                              }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+                               }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const pubilshedTime = moment(published_at);
     const [likeTimes, setLikeTimes] = useState(likes);
     useEffect(() => {
-        fetch(`http://192.168.1.13:1337/studio-works/${id}`)
+        fetch(`http://${LOCAL_URL}:1337/studio-works/${id}`)
             .then(res => res.json())
             .then(data => {
                 setLikeTimes(data.likes | 0);
@@ -44,7 +44,7 @@ const StudioWorks: NextPage = ({
     async function handleLike() {
         setLikeTimes(likeTimes + 1);
         const data = {likes: likeTimes + 1};
-        await fetch(`http://192.168.1.13:1337/studio-works/${id}`, {
+        await fetch(`http://${LOCAL_URL}:1337/studio-works/${id}`, {
             method: "PUT",
             body: JSON.stringify(data),
             headers: {"Content-Type": "application/json"},
@@ -151,7 +151,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
             author: author,
             likes: likes,
             neighber: neighber,
-            titleImage:titleImage
+            titleImage: titleImage
         },
     };
 };

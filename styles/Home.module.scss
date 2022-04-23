@@ -1,17 +1,32 @@
 .mainGraph {
-  height: 500px;
+  margin: calc(50vh - 50vw) 0 calc(50vh - 50vw);
+  height: 110vw;
+
+  .circle {
+    width: 50px;
+    height: 50px;
+    background-color: #f0fe97;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(300px,300px);
+    z-index: 10;
+    //background-image: radial-gradient(#000 0%, #f0fe97 70%);
+    animation: blink 4.5s linear infinite;
+    color:#f0fe97;
+
+  }
 }
 
 .swipper {
-  width: 100%;
-  margin-bottom: 40px;
-
+  width: 100vw;
+  margin-bottom: 60px;
+  padding: 0 0;
 }
 
 .history {
   padding: 0 40px;
   height: 700px;
-
+  margin-bottom: 40px;
   .title {
     margin-bottom: 40px;
   }
@@ -19,10 +34,17 @@
 
 .feature {
   padding: 0 40px;
+  margin-bottom: 60px;
+
 }
 
 .honor {
   padding: 0 40px;
+  margin-bottom: 60px;
+
+  .title {
+    margin-bottom: 20px;
+  }
 
   .honorImg {
     width: 100%;
@@ -37,5 +59,15 @@
   margin-bottom: 40px;
 }
 
+
+@keyframes blink {
+  25% {
+  }
+  50%,
+  100% {
+  }
+  75% {
+  }
+}
 @media (max-width: 800px) {
 }

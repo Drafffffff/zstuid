@@ -36,7 +36,7 @@ export const CardTitle: React.FC<IProps> = ({children}) => {
 };
 
 export const tidyUrl = (url: string): string => {
-    const Url = `http://192.168.1.13:1337${url}`;
+    const Url = `http://${LOCAL_URL}:1337${url}`;
     return Url;
 };
 
@@ -731,52 +731,16 @@ const map = (n: number, start1: number, stop1: number, start2: number, stop2: nu
         return constrain(newval, stop2, start2);
     }
 };
-
-export const History = () => {
+interface HistoryItem {
+    year: string,
+    event_: string
+}
+export interface historyProps {
+    historyData: HistoryItem[]
+}
+export const History: React.FC<historyProps> = ({historyData}) => {
     gsap.registerPlugin(ScrollTrigger);
     gsap.registerPlugin(CustomEase)
-    const data = [
-        {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        }, {
-            year: "1996",
-            event_: 'sdfsdf'
-        },
-    ]
     const yearsRef = useRef([])
     const eventsRef = useRef([])
     const timelineCurse = useRef(null)
@@ -796,28 +760,27 @@ export const History = () => {
             duration: 1,
             ease: "none"
         });
-
         const yearsAnime = gsap.to(yearsRef.current, {
             stagger: 0.5,
             // delay: 0.5,
             duration: 1,
             x: -100,
             color: "#f0fe97",
+            opacity: 1,
             scale: 2,
             ease: CustomEase.create("custom", "M0,0,C0,0,0.198,1,0.5,1,0.8,1,1,0,1,0"),
             paused: true
         })
         const eventsAnime = gsap.to(eventsRef.current, {
             stagger: 0.5,
-            scale: 2,
+            scale: 1.5,
             duration: 1,
+            opacity: 1,
             color: "#f0fe97",
             ease: CustomEase.create("custom", "M0,0,C0,0,0.198,1,0.5,1,0.8,1,1,0,1,0"),
-            x: 100,
+            x: 90,
             paused: true
         })
-
-
         const linesAnime = gsap.to(linesRef.current, {
             stagger: 0.23,
             delay: 0.5,
@@ -830,18 +793,23 @@ export const History = () => {
         linesAnime.progress(0.05)
         timelineCurseAnime.eventCallback("onUpdate", () => {
             const t = timelineCurseAnime.time();
-            const tt = map(t, 0, 1, 0.05, 0.95, true);
-            linesAnime.totalProgress(tt, true)
-            yearsAnime.progress(t, true)
-            eventsAnime.progress(t, true)
+            const tt = map(t, 0, 1, 0.05, 0.965, true);
+            // const ttt = map(t, 0, 1, 0.05, 0.965, true);
+            linesAnime.progress(tt, true)
+            yearsAnime.progress(tt, true)
+            eventsAnime.progress(tt, true)
         })
+
+        return () => {
+            gsap.killTweensOf(timelineCurseAnime)
+        }
     }, [])
     return (
         <div className={styles.history}>
             <div className={styles.timeLine}>
                 <div className={styles.timelineCursor} ref={timelineCurse}/>
                 <div className={styles.lines}>
-                    {data.map((e, i) => {
+                    {historyData.map((e, i) => {
                         const index = i * 5
                         return (
                             <div key={i} className={styles.unit}>
@@ -876,12 +844,9 @@ export const History = () => {
         </div>
     )
 }
-
 interface bannerProps {
     bannerData: any
 }
-
-
 export const BannerM: React.FC<bannerProps> = ({bannerData}) => {
     const top = useRef(null)
     const bottom = useRef(null)
@@ -908,7 +873,7 @@ export const BannerM: React.FC<bannerProps> = ({bannerData}) => {
                 });
             } else if (count === 1) {
                 gsap.to(left.current, {
-                    flexBasis: "90%"
+                    flexBasis: "95%"
                 });
                 gsap.to(top.current, {
                     flexBasis: "8%"
@@ -918,7 +883,6 @@ export const BannerM: React.FC<bannerProps> = ({bannerData}) => {
                     flexBasis: "5%"
                 });
             }
-            console.log(tidyUrl(bannerData.bannerItem1.coverUrl))
         }, 3000)
         return () => clearInterval(intervalId);
     }, [])
@@ -949,3 +913,21 @@ export const BannerM: React.FC<bannerProps> = ({bannerData}) => {
             </div>
         </div>)
 }
+interface HomeContentProp {
+
+}
+export const HomeContent: React.FC<HomeContentProp> = () => {
+    const content = [`浙江省“十二五”“十三五”
+    新兴特色专业`, `国家级一流本科专业建设点`, `教育部卓越工程师培养计划专业`, `培养能服务并引领数字智能及制造行业发展需求的具有人文关怀和社会责任感的复合型工业设计卓越人才`]
+    return (
+        <div className={styles.homeContent}>
+            <div className={`${styles.text1} ${styles.text}`}>{content[0]}</div>
+            <div className={`${styles.text2} ${styles.text}`}>{content[1]}</div>
+            <div className={`${styles.text3} ${styles.text}`}>{content[2]}</div>
+            <div className={`${styles.text4} ${styles.text}`}>{content[3]}</div>
+        </div>
+    )
+}
+
+
+export const LOCAL_URL = '192.168.1.4'

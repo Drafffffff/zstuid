@@ -4,7 +4,7 @@ import styles from "../../styles/graduaexhibition.module.scss";
 import MainLayout from "../../components/MainLayout";
 import Image from "next/image";
 import MobileLayout from "../../components/MobileLayout";
-import {MainText, PageNav, Titleswe} from "../../components/utils";
+import {LOCAL_URL, MainText, PageNav, Titleswe} from "../../components/utils";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import {useRef, useState} from "react";
 import MobileCards from "../../components/MobileCards";
@@ -73,9 +73,9 @@ const Index: NextPage = ({
     );
 };
 export const getServerSideProps: GetServerSideProps = async context => {
-    const res = await fetch(`http://127.0.0.1:1337/graduation-works`);
+    const res = await fetch(`http://${LOCAL_URL}:1337/graduation-works`);
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
     const works = data.map((a: any) => ({
         title: a.title,
         published_at: a.published_at,

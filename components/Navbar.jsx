@@ -26,11 +26,12 @@ const Navbar = () => {
   return (
     <div>
       <div className={styles.navbar}>
-        <Image
-          src={require("../public/img/navbar/logowithtitle.png")}
-          alt="logo"
-          quality={100}
-        />
+        {/*<Image*/}
+        {/*  src={require("../public/img/navbar/logowithtitle.svg")}*/}
+        {/*  alt="logo"*/}
+        {/*  quality={100}*/}
+        {/*/>*/}
+        <img src={require("../public/img/navbar/logowithtitle.svg")}/>
         <div className={styles.links}>
           <Link href={"/"}>
             <a className={`${styles.link}`}>关于我们</a>

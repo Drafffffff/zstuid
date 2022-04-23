@@ -6,7 +6,7 @@ import {
 import {useRouter} from "next/router";
 import MobileLayout from "../../../components/MobileLayout";
 import styles from "../../../styles/coursedetail.module.scss";
-import {MainText, Title1, tidyUrl, PageNav} from "../../../components/utils";
+import {MainText, Title1, tidyUrl, PageNav, LOCAL_URL} from "../../../components/utils";
 import Image from "next/image";
 import Head from "next/head";
 import {useEffect, useState} from "react";
@@ -28,7 +28,7 @@ const courses: categray = {
     yxkzyjh: "原型控制与交互",
     sjtx: "设计图学",
 };
-const url = "http://192.168.1.13:1337";
+const url = `http://${LOCAL_URL}:1337`;
 const CourseDetail: NextPage = ({
                                     feature,
                                     intro,

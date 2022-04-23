@@ -7,11 +7,28 @@ import React, {useRef} from "react";
 import {useEffect} from "react";
 import Image from 'next/image'
 import MobileLayout from "../components/MobileLayout";
-import {BannerM, Features, History, Talent, tidyUrl, Titleswe} from "../components/utils";
+import {
+    BannerM,
+    Features,
+    History,
+    historyProps,
+    HomeContent,
+    LOCAL_URL,
+    Talent,
+    tidyUrl,
+    Titleswe
+} from "../components/utils";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
+import Box from "../components/BoxM";
 
 
-const Home: NextPage = ({talents, featuresM, honor,banner}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const Home: NextPage = ({
+                            talents,
+                            featuresM,
+                            honor,
+                            banner,
+                            histories
+                        }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
     return (
         <div>
@@ -21,7 +38,13 @@ const Home: NextPage = ({talents, featuresM, honor,banner}: InferGetServerSidePr
                 <link rel="icon" href="/public/favicon.ico"/>
             </Head>
             <MobileLayout>
-                <div className={styles.mainGraph}/>
+                <div className={styles.mainGraph}>
+                    <div className={styles.texts}>
+                        <HomeContent/>
+                    </div>
+                    <div className={styles.circle}/>
+                    <Box/>
+                </div>
                 <div className={styles.swipper}>
                     <BannerM bannerData={banner}/>
                 </div>
@@ -29,7 +52,7 @@ const Home: NextPage = ({talents, featuresM, honor,banner}: InferGetServerSidePr
                     <div className={styles.title}>
                         <Titleswe zh="历史沿革" en="Development History"/>
                     </div>
-                    <History/>
+                    <History historyData={histories}/>
                 </div>
                 <div className={styles.feature}>
                     <div className={styles.title}>
@@ -58,7 +81,7 @@ const Home: NextPage = ({talents, featuresM, honor,banner}: InferGetServerSidePr
 
 
 export const getServerSideProps: GetServerSideProps = async context => {
-        const res = await fetch("http://127.0.0.1:1337/about-us");
+        const res = await fetch(`http://${LOCAL_URL}:1337/about-us`);
         const data = await res.json() as any;
         const talents = data["talents"].map((e: any) => ({
             title: e.title,
@@ -83,13 +106,21 @@ export const getServerSideProps: GetServerSideProps = async context => {
                 coverUrl: data["banner"]["bannerItem3"].cover.url
             },
         }
-        console.log(featuresM)
+
+        const histories: historyProps = data["history"].map((e: { year: any; content: any; }) => (
+            {
+                year: e.year,
+                event_: e.content
+            }
+        ))
+        // console.log(featuresM)
         return {
             props: {
                 talents: talents,
                 featuresM: featuresM,
                 honor: honor,
-                banner: banner
+                banner: banner,
+                histories: histories
             },
         };
     }
