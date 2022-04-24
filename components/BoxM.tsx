@@ -6,7 +6,7 @@ import * as THREE from 'three'
 import {useWindowSize} from "usehooks-ts";
 import {TextureLoader} from 'three/src/loaders/TextureLoader';
 // import { VertexNormalsHelper } from "three/examples/jsm/helpers/VertexNormalsHelper";
-
+import styles from "./utils.module.scss"
 // import { FaceNormalsHelper } from "three/examples/jsm/helpers/";
 
 extend(OrbitControls)
@@ -15,7 +15,8 @@ const CameraController = () => {
     useEffect(
         () => {
             const controls = new OrbitControls(camera, gl.domElement);
-
+            controls.enableZoom = false;
+            // controls.enableRotate = false;
             return () => {
                 controls.dispose();
             };
@@ -53,16 +54,16 @@ const BoxItem: FC<BoxProps> = (props) => {
 }
 
 interface cubeProps {
-
+    position: Vector3
 }
 
 const Cubes: FC<cubeProps> = (props) => {
     const a = 4;
     const [DesignT, DeliverT, DepartmentT, DigitalT] = useLoader(TextureLoader, [
-        require('/public/img/aboutUs/design.png').default.src,
-        require('/public/img/aboutUs/deliver.png').default.src,
-        require('/public/img/aboutUs/department.png').default.src,
-        require('/public/img/aboutUs/digital.png').default.src,
+        require('/public/img/aboutUs/design1.png').default.src,
+        require('/public/img/aboutUs/deliver1.png').default.src,
+        require('/public/img/aboutUs/department1.png').default.src,
+        require('/public/img/aboutUs/digital1.png').default.src,
     ])
 
     function getCubePos(size: number) {
@@ -174,11 +175,9 @@ const Cubes: FC<cubeProps> = (props) => {
             e.setFromPoints(otherLine[i])
         })
 
-        // @ts-ignore
-        console.log(smCubesRef.current[0].position)
     }, [])
     return (
-        <group>
+        <group {...props}>
             <group ref={groupRef}>
                 <group>
                     {normalCube.map((e, i) => (
@@ -228,19 +227,19 @@ const Cubes: FC<cubeProps> = (props) => {
                 <group>
                     <mesh position={[0, 0, 10]} scale={[20, 20, 20]}>
                         <planeBufferGeometry/>
-                        <meshBasicMaterial  map={DesignT} transparent={true} opacity={0.5}/>
+                        <meshBasicMaterial map={DesignT} transparent={true} opacity={1} color={'#eaff71'}/>
                     </mesh>
                     <mesh position={[0, 0, -10]} rotation={[0, Math.PI, 0]} scale={[20, 20, 20]}>
                         <planeBufferGeometry/>
-                        <meshBasicMaterial  map={DeliverT} transparent={true} opacity={0.5}/>
+                        <meshBasicMaterial map={DeliverT} transparent={true} opacity={1} color={'#eaff71'}/>
                     </mesh>
                     <mesh position={[-10, 0, 0]} rotation={[0, Math.PI * 1.5, 0]} scale={[20, 20, 20]}>
                         <planeGeometry/>
-                        <meshBasicMaterial  map={DepartmentT} transparent={true} opacity={0.5}/>
+                        <meshBasicMaterial map={DepartmentT} transparent={true} opacity={1} color={'#eaff71'}/>
                     </mesh>
                     <mesh position={[10, 0, 0]} rotation={[0, Math.PI * 0.5, 0]} scale={[20, 20, 20]}>
                         <planeGeometry/>
-                        <meshBasicMaterial  map={DigitalT}  transparent={true} opacity={0.5}/>
+                        <meshBasicMaterial map={DigitalT} transparent={true} opacity={1} color={'#eaff71'}/>
                     </mesh>
                 </group>
             </group>
@@ -284,7 +283,7 @@ const Cubes: FC<cubeProps> = (props) => {
 const Box: NextPage = () => {
     const sizes = useWindowSize()
     return (
-        <Canvas camera={{position: [0, 0, 30]}}>
+        <Canvas camera={{position: [0, 0, 30]}} className={styles.threeBox}>
             <CameraController/>
             {/*<ambientLight intensity={2}/>*/}
             {/*<pointLight position={[40, 40, 40]}/>*/}
@@ -296,11 +295,10 @@ const Box: NextPage = () => {
                     near={0.1}
                     far={100}
                 >
-                    <Cubes/>
+                    <Cubes position={[0, 2, 0]}/>
                 </perspectiveCamera>
                 {/*<BoxItem position={[0, 0, 0]}/>*/}
                 {/*<axesHelper scale={10}/>*/}
-
             </Suspense>
         </Canvas>
     )

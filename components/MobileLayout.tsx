@@ -14,11 +14,9 @@ const MobileLayout: React.FC<IProps> = ({ children }) => {
   return (
     <>
       
-      <Navbar></Navbar>
       <main className={styles.main}>
         <div className={styles.mobileContainer}>{children}</div>
       </main>
-      <Footer></Footer>
     </>
   );
 };

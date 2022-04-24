@@ -1,6 +1,29 @@
 .mainGraph {
-  margin: calc(50vh - 50vw) 0 calc(50vh - 50vw);
-  height: 110vw;
+  padding: calc(50vh - 50vw) 0 calc(50vh - 50vw);
+  height: 100vh;
+
+  .circle {
+    width: 70px;
+    height: 70px;
+    background-color: #f0fe97;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(0px, 300px);
+    right: 40px;
+    z-index: 10;
+    //background-image: radial-gradient(#000 0%, #f0fe97 70%);
+    animation: blink 4.5s linear infinite;
+    color: #f0fe97;
+
+  }
+}
+
+
+.mainGraphW {
+  height: 100vh;
+  //margin-top: 97px;
+  //max-width: 1200px;
+  margin: 0 auto 30px auto;
 
   .circle {
     width: 50px;
@@ -8,11 +31,11 @@
     background-color: #f0fe97;
     border-radius: 50%;
     position: absolute;
-    transform: translate(300px,300px);
+    transform: translate(300px, 300px);
     z-index: 10;
     //background-image: radial-gradient(#000 0%, #f0fe97 70%);
     animation: blink 4.5s linear infinite;
-    color:#f0fe97;
+    color: #f0fe97;
 
   }
 }
@@ -23,19 +46,43 @@
   padding: 0 0;
 }
 
+.swipperW {
+  width: 80%;
+  padding: 0 0;
+  //max-width: 1600px;
+  margin: 0 auto 60px auto;
+}
+
 .history {
   padding: 0 40px;
   height: 700px;
   margin-bottom: 40px;
+
   .title {
     margin-bottom: 40px;
+  }
+}
+
+
+.historyW {
+  padding: 0 40px;
+  max-width: 1200px;
+  //height: 2000px;
+  margin: 100px auto 40px auto;
+
+  .title {
+    margin-bottom: 40px;
+  }
+  .content{
+    margin-top: 80px;
+    text-emphasis: aliceblue;
   }
 }
 
 .feature {
   padding: 0 40px;
   margin-bottom: 60px;
-
+  overflow: hidden;
 }
 
 .honor {
@@ -60,6 +107,69 @@
 }
 
 
+.title {
+  margin-bottom: 40px;
+}
+
+.feature {
+  padding: 0 40px;
+  margin-bottom: 60px;
+
+}
+.featureW {
+  padding: 0 40px;
+  max-width: 1200px;
+  margin:0 auto 60px auto;
+  //overflow: hidden;
+}
+
+.honor {
+  padding: 0 40px;
+  margin-bottom: 60px;
+
+  .title {
+    margin-bottom: 20px;
+
+
+  }
+
+  .honorImg {
+    width: 100%;
+    position: relative;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+}
+
+.honorW {
+  padding: 0 40px;
+  margin:0 auto 60px auto;
+
+  max-width: 1200px;
+
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .honorImg {
+    width: 100%;
+    position: relative;
+    //height: 500px;
+    margin-bottom: 20px;
+  }
+}
+.talent {
+  padding: 0 40px;
+  margin-bottom: 40px;
+}
+.talentW {
+  padding: 0 40px;
+  margin:0 auto 60px auto;
+  max-width: 1200px;
+
+}
+
+
 @keyframes blink {
   25% {
   }
@@ -69,5 +179,7 @@
   75% {
   }
 }
+
 @media (max-width: 800px) {
 }
+

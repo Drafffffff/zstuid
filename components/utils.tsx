@@ -1,5 +1,5 @@
 import styles from "./utils.module.scss";
-import React, {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useLayoutEffect, useRef, useState} from "react";
 import Image from "next/image";
 import Router from "next/router";
 import {gsap} from "gsap";
@@ -18,6 +18,10 @@ interface IProps {
 
 export const MainText: React.FC<IProps> = ({children}) => {
     return <div className={styles.mainText}>{children}</div>;
+};
+
+export const MainTextW: React.FC<IProps> = ({children}) => {
+    return <div className={styles.mainTextW}>{children}</div>;
 };
 export const MainTexts: React.FC<IProps> = ({children}) => {
     return <div className={styles.mainTexts}>{children}</div>;
@@ -714,6 +718,105 @@ export const Features: React.FC<FeatureProps> = ({content}) => {
     )
 }
 
+interface featureItem {
+    title: string,
+    imgUrl: string
+}
+
+interface FeatureMProps {
+    content: featureItem[]
+}
+
+export const FeaturesW: React.FC<FeatureMProps> = ({content}) => {
+    gsap.registerPlugin(ScrollTrigger);
+    const ref = useRef(null);
+    const itemsRef = useRef([])
+    const textitemsRef = useRef([])
+    useLayoutEffect(() => {
+        itemsRef.current = itemsRef.current.slice(0, content.length);
+        const element = ref.current;
+        const tl = gsap.timeline(
+            {
+                scrollTrigger: {
+                    trigger: element,
+                    toggleActions: "restart pause reverse none",
+                    // markers: true,
+                    scrub: 2,
+                    start: "center 87%",
+                    end: "+=200"
+                },
+                paused: true
+            }
+        );
+        gsap.set(element, {
+            x: "100vw",
+
+        });
+        itemsRef.current.map((e) => {
+            gsap.set(e, {
+                x: "100vw",
+
+            });
+        })
+        tl.to(element, {
+            x: 0,
+            duration: 1
+        });
+
+        itemsRef.current.map((e) => {
+            tl.to(e, {
+                x: 0,
+                duration: 1
+            });
+        })
+
+
+        textitemsRef.current.map((e) => {
+            gsap.set(e, {opacity: 0})
+            gsap.to(e, {
+                scrollTrigger: {
+                    trigger: e,
+                    toggleActions: "restart pause reverse none",
+                    // markers: true,
+                    scrub: 0.5,
+                    start: "center 87%",
+                    end: "+=150"
+                },
+                opacity: 1,
+                duration: 3
+            });
+        })
+    }, [content])
+    return (
+        <div className={styles.featuresW}>
+
+            <div className={styles.top}>
+                <div className={styles.circle} ref={ref}/>
+            </div>
+            {content.map((e, i) => {
+                return (<div className={styles.feature} key={i}>
+                    <div className={styles.content} ref={
+                        // @ts-ignore
+                        el => textitemsRef.current[i] = el}>
+                        <div>
+                            {e.title}
+                        </div>
+
+                        <div className={styles.image}>
+                            <Image src={tidyUrl(e.imgUrl)} alt={"contentImage"} objectFit={'cover'} layout={"fill"}/>
+                        </div>
+                    </div>
+
+                    <div className={styles.circle} ref={
+                        // @ts-ignore
+                        el => itemsRef.current[i] = el}/>
+                </div>)
+            })}
+
+        </div>
+    )
+}
+
 
 const constrain = (n: number, low: number, high: number) => {
     return Math.max(Math.min(n, high), low);
@@ -731,13 +834,16 @@ const map = (n: number, start1: number, stop1: number, start2: number, stop2: nu
         return constrain(newval, stop2, start2);
     }
 };
+
 interface HistoryItem {
     year: string,
     event_: string
 }
+
 export interface historyProps {
     historyData: HistoryItem[]
 }
+
 export const History: React.FC<historyProps> = ({historyData}) => {
     gsap.registerPlugin(ScrollTrigger);
     gsap.registerPlugin(CustomEase)
@@ -844,16 +950,182 @@ export const History: React.FC<historyProps> = ({historyData}) => {
         </div>
     )
 }
+
+
+export const HistoryW: React.FC<historyProps> = ({historyData}) => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(CustomEase)
+    const yearsRef = useRef([])
+    const eventsRef = useRef([])
+    const timelineCurse = useRef(null)
+    const linesRef = useRef([])
+    const lineContainerRef = useRef(null)
+    const total = useRef(null)
+    useEffect(() => {
+        const element = timelineCurse.current
+        const timelineCurseAnime = gsap.to(element, {
+            scrollTrigger: {
+                trigger: total.current,
+                toggleActions: "restart pause reverse none",
+                // markers: true,
+                scrub: 0.2,
+                start: "center 80%",
+                end: "+=50%",
+                // pin: true,
+
+            },
+            // @ts-ignore
+            x: lineContainerRef.current.clientWidth - 50,
+            duration: 1,
+            ease: "none",
+        });
+        const yearsAnime = gsap.to(yearsRef.current, {
+            stagger: 0.5,
+            // delay: 0.5,
+            duration: 1,
+            y: -100,
+            color: "#f0fe97",
+            opacity: 1,
+            scale: 2,
+            ease: CustomEase.create("custom", "M0,0,C0,0,0.198,1,0.5,1,0.8,1,1,0,1,0"),
+            paused: true
+        })
+        const eventsAnime = gsap.to(eventsRef.current, {
+            stagger: 0.5,
+            scale: 1.5,
+            duration: 1,
+            opacity: 1,
+            color: "#f0fe97",
+            ease: CustomEase.create("custom", "M0,0,C0,0,0.198,1,0.5,1,0.8,1,1,0,1,0"),
+            y: 150,
+            paused: true
+        })
+        const linesAnime = gsap.to(linesRef.current, {
+            stagger: 0.23,
+            delay: 0.5,
+            duration: 1.6,
+            y: 18,
+            ease: CustomEase.create("custom", "M0,0,C0,0,0.198,1,0.5,1,0.8,1,1,0,1,0"),
+            paused: true,
+            yoyo: true
+        })
+        linesAnime.progress(0.025)
+        timelineCurseAnime.eventCallback("onUpdate", () => {
+            const t = timelineCurseAnime.time();
+            const tt = map(t, 0, 1, 0.025, 0.985, true);
+            // const ttt = map(t, 0, 1, 0.05, 0.965, true);
+            linesAnime.progress(tt, true)
+            yearsAnime.progress(tt, true)
+            eventsAnime.progress(tt, true)
+        })
+
+        return () => {
+            gsap.killTweensOf(timelineCurseAnime)
+            gsap.killTweensOf(linesAnime)
+            gsap.killTweensOf(eventsAnime)
+        }
+    }, [])
+    return (
+        <div className={styles.historyW} ref={total}>
+            <div className={styles.timeLineW}>
+                <div className={styles.timelineCursorW} ref={timelineCurse}/>
+                <div className={styles.linesW} ref={lineContainerRef}>
+                    {historyData.map((e, i) => {
+                        const index = i * 10
+                        return (
+                            <div key={i} className={styles.unitW}>
+                                <div className={styles.yearW} ref={
+                                    // @ts-ignore
+                                    el => yearsRef.current[i] = el}>{e.year}</div>
+                                <div className={styles.eventW} ref={
+                                    // @ts-ignore
+                                    el => eventsRef.current[i] = el}>{e.event_}</div>
+                                <div className={styles.lineLW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index] = el}/>
+                                <div className={styles.lineW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 1] = el}/>
+                                <div className={styles.lineW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 2] = el}/>
+                                <div className={styles.lineW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 3] = el}/>
+                                <div className={styles.lineW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 4] = el}/>
+
+                                <div className={styles.lineLW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 5] = el}/>
+                                <div className={styles.lineW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 6] = el}/>
+                                <div className={styles.lineW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 7] = el}/>
+                                <div className={styles.lineW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 8] = el}/>
+                                <div className={styles.lineW} ref={
+                                    // @ts-ignore
+                                    el => linesRef.current[index + 9] = el}/>
+
+
+                                <div className={styles.lineW} style={{backgroundColor: "#000"}}/>
+
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+        </div>
+
+    )
+}
+
 interface bannerProps {
     bannerData: any
 }
+
 export const BannerM: React.FC<bannerProps> = ({bannerData}) => {
     const top = useRef(null)
     const bottom = useRef(null)
     const left = useRef(null)
     const right = useRef(null)
+    const container = useRef(null)
+    const [width, setWidth] = useState(0);
+
+
+    function changeTop() {
+        gsap.to(left.current, {
+            flexBasis: "95%"
+        });
+        gsap.to(top.current, {
+            flexBasis: "90%"
+        });
+    }
+
+    function changeBottom() {
+        gsap.to(left.current, {
+            flexBasis: "95%"
+        });
+        gsap.to(top.current, {
+            flexBasis: "8%"
+        });
+    }
+
+    function changeRight() {
+        gsap.to(left.current, {
+            flexBasis: "5%"
+        });
+    }
+
     let count = 0;
     useEffect(() => {
+        // @ts-ignore
+        setWidth(container.current.clientWidth)
         gsap.defaults({
             ease: "power2.out",
             duration: 0.8
@@ -865,25 +1137,15 @@ export const BannerM: React.FC<bannerProps> = ({bannerData}) => {
                 count++
             }
             if (count === 0) {
-                gsap.to(left.current, {
-                    flexBasis: "90%"
-                });
-                gsap.to(top.current, {
-                    flexBasis: "90%"
-                });
+                changeTop()
             } else if (count === 1) {
-                gsap.to(left.current, {
-                    flexBasis: "95%"
-                });
-                gsap.to(top.current, {
-                    flexBasis: "8%"
-                });
+                changeBottom()
             } else if (count === 2) {
-                gsap.to(left.current, {
-                    flexBasis: "5%"
-                });
+                changeRight()
             }
         }, 3000)
+
+
         return () => clearInterval(intervalId);
     }, [])
 
@@ -891,31 +1153,47 @@ export const BannerM: React.FC<bannerProps> = ({bannerData}) => {
         window.location.href = url
     }
     return (
-        <div className={styles.bannerContainer}>
+        <div className={styles.bannerContainer} ref={container}
+             style={{height: `${width / 1.875}px`}}>
             <div className={styles.left} ref={left}>
                 <div className={styles.top}
                      style={{backgroundImage: `url(${tidyUrl(bannerData.bannerItem1.coverUrl)})`}} ref={top}
                      onClick={() => {
                          handleClick(bannerData.bannerItem1.url)
-                     }}/>
+                     }}
+                     onMouseEnter={() => {
+                         changeTop()
+                     }}
+                />
                 <div className={styles.bottom}
                      style={{backgroundImage: `url(${tidyUrl(bannerData.bannerItem2.coverUrl)})`}} ref={bottom}
                      onClick={() => {
                          handleClick(bannerData.bannerItem2.url)
-                     }}/>
+                     }}
+                     onMouseEnter={() => {
+                         changeBottom()
+                     }}
+                />
+
             </div>
             <div className={styles.right}>
                 <div className={styles.right}
                      style={{backgroundImage: `url(${tidyUrl(bannerData.bannerItem3.coverUrl)})`}} ref={right}
                      onClick={() => {
                          handleClick(bannerData.bannerItem3.url)
-                     }}/>
+                     }}
+                     onMouseEnter={() => {
+                         changeRight()
+                     }}
+                />
             </div>
         </div>)
 }
+
 interface HomeContentProp {
 
 }
+
 export const HomeContent: React.FC<HomeContentProp> = () => {
     const content = [`浙江省“十二五”“十三五”
     新兴特色专业`, `国家级一流本科专业建设点`, `教育部卓越工程师培养计划专业`, `培养能服务并引领数字智能及制造行业发展需求的具有人文关怀和社会责任感的复合型工业设计卓越人才`]
@@ -925,6 +1203,20 @@ export const HomeContent: React.FC<HomeContentProp> = () => {
             <div className={`${styles.text2} ${styles.text}`}>{content[1]}</div>
             <div className={`${styles.text3} ${styles.text}`}>{content[2]}</div>
             <div className={`${styles.text4} ${styles.text}`}>{content[3]}</div>
+        </div>
+    )
+}
+
+
+export const HomeContentW: React.FC<HomeContentProp> = () => {
+    const content = [`浙江省“十二五”“十三五”
+    新兴特色专业`, `国家级一流本科专业建设点`, `教育部卓越工程师培养计划专业`, `培养能服务并引领数字智能及制造行业发展需求的具有人文关怀和社会责任感的复合型工业设计卓越人才`]
+    return (
+        <div className={styles.homeContentW}>
+            <div className={`${styles.text1W} ${styles.textW}`}>{content[0]}</div>
+            <div className={`${styles.text2W} ${styles.textW}`}>{content[1]}</div>
+            <div className={`${styles.text3W} ${styles.textW}`}>{content[2]}</div>
+            <div className={`${styles.text4W} ${styles.textW}`}>{content[3]}</div>
         </div>
     )
 }

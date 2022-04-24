@@ -8,12 +8,11 @@
 }
 .container{
   display: block;
+  margin:auto;
 }
 .mobileContainer {
-  width: 100%;
   overflow: hidden;
-
-  // height: 2000px;
+  width: 100%;
   display: none;
   background-image: url("../public/img/utils/bgGrid.png");
   background-repeat: no-repeat;
