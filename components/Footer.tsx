@@ -55,7 +55,7 @@ export default function Footer() {
                         <p className={styles.infomation}>
                             <a href="https://beian.miit.gov.cn/"> 浙ICP备000000000号</a>
                             ｜技术支持：
-                            <a href="https://beian.miit.gov.cn/">ExchangeReaction</a>
+                            <a href="https://drafff.art/">ExchangeReaction</a>
                         </p>
                     </div>
                 </div>

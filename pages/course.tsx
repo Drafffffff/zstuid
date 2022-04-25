@@ -2,15 +2,32 @@ import type {NextPage} from "next";
 import styles from "../styles/course.module.scss";
 import MainLayout from "../components/MainLayout";
 import Image from "next/image";
-import {MainText, Title1} from "../components/utils";
+import {MainText, MainTextW, Title1, Title1W} from "../components/utils";
 import MobileLayout from "../components/MobileLayout";
 import Link from "next/link";
 import Head from "next/head";
 import Navbar from "../components/Navbar";
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Footer from "../components/Footer";
+import gsap from "gsap";
 
 const Course: NextPage = () => {
+    const [linkHover, setLinkHover] = useState(0)
+    const titleSquare = useRef(null)
+    useEffect(() => {
+        gsap.to(titleSquare.current, {
+            width: "90%",
+            duration: 3
+        })
+    }, [])
+
+
+    const handleMouseOver = (i: number) => {
+        setLinkHover(i)
+    }
+    const handleMouseLeave = () => {
+        setLinkHover(0)
+    }
     return (
         <div>
             <Head>
@@ -83,6 +100,149 @@ const Course: NextPage = () => {
                     </MainText>
                 </div>
             </MobileLayout>
+            <MainLayout>
+                <div className={styles.navW}>
+                    <div className={styles.title}>
+                        <div className={styles.left}>
+                            <Image src={require("/public/img/course/w/titleL.png")} alt={"titleL"}/>
+                        </div>
+                        <div className={styles.mid}>
+                            <div className={styles.square} ref={titleSquare}/>
+                        </div>
+                        <div className={styles.right}>
+                            <Image src={require("/public/img/course/w/titleR.png")} alt={"titleR"}/>
+
+                        </div>
+                    </div>
+                    <div className={styles.select}>
+                        <Link href={"/courseDetail/gysjsh"}>
+                            <a className={`${styles.choice} ${styles.gongyesheji}`}
+                               onMouseOver={() => {
+                                   handleMouseOver(1)
+                               }}
+                               onMouseLeave={() => {
+                                   handleMouseLeave()
+                               }}>
+                                <Image
+                                    src={require("../public/img/course/select/gongyesheji.svg")}
+                                    alt="工业设计手绘"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                />
+                                <Image
+                                    src={require("../public/img/course/select/gongyesheji_a.svg")}
+                                    alt="工业设计手绘"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                    style={{visibility: linkHover === 1 ? "visible" : "hidden"}}
+                                />
+                            </a>
+                        </Link>
+                        <Link href={"/courseDetail/jcsj"}>
+                            <a className={`${styles.choice} ${styles.jichusheji}`}
+                               onMouseOver={() => {
+                                   handleMouseOver(2)
+                               }}
+                               onMouseLeave={() => {
+                                   handleMouseLeave()
+                               }}>
+                                <Image
+                                    src={require("../public/img/course/select/jichusheji.svg")}
+                                    alt="基础设计"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+
+                                />
+                                <Image
+                                    src={require("../public/img/course/select/jichusheji_a.svg")}
+                                    alt="基础设计"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                    style={{visibility: linkHover === 2 ? "visible" : "hidden"}}
+                                />
+                            </a>
+                        </Link>
+                        <Link href={"/courseDetail/sjtx"}>
+                            <a className={`${styles.choice} ${styles.shejituxue}`}
+                               onMouseOver={() => {
+                                   handleMouseOver(3)
+                               }}
+                               onMouseLeave={() => {
+                                   handleMouseLeave()
+                               }}>
+                                <Image
+                                    src={require("../public/img/course/select/shejituxue.svg")}
+                                    alt="设计图学"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                />
+                                <Image
+                                    src={require("../public/img/course/select/shejituxue_a.svg")}
+                                    alt="设计图学"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                    style={{visibility: linkHover === 3 ? "visible" : "hidden"}}
+                                />
+                            </a>
+                        </Link>
+                        <Link href={"/courseDetail/yxkzyjh"}>
+                            <a className={`${styles.choice} ${styles.yuanxinkongzhi}`}
+                               onMouseOver={() => {
+                                   handleMouseOver(4)
+                               }}
+                               onMouseLeave={() => {
+                                   handleMouseLeave()
+                               }}>
+                                <Image
+                                    src={require("../public/img/course/select/yuanxingkongzhi.svg")}
+                                    alt="原型控制与交互"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                />
+                                <Image
+                                    src={require("../public/img/course/select/yuanxingkongzhi_a.svg")}
+                                    alt="原型控制与交互"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                    style={{visibility: linkHover === 4 ? "visible" : "hidden"}}
+                                />
+                            </a>
+                        </Link>
+                        <Link href={"/courseDetail/rjgcx"}>
+                            <a className={`${styles.choice} ${styles.renjigongcheng}`}
+                               onMouseOver={() => {
+                                   handleMouseOver(5)
+                               }}
+                               onMouseLeave={() => {
+                                   handleMouseLeave()
+                               }}>
+                                <Image
+                                    src={require("../public/img/course/select/renji.svg")}
+                                    alt="人机工程学"
+                                    layout={"fill"}
+                                    objectFit={"fill"}
+                                />
+                                <Image
+                                    src={require("../public/img/course/select/renji_a.svg")}
+                                    alt="人机工程学"
+                                    layout={"fill"}
+                                    objectFit={"fill"}
+                                    style={{visibility: linkHover === 5 ? "visible" : "hidden"}}
+                                />
+                            </a>
+                        </Link>
+                    </div>
+                </div>
+                <div className={styles.contentW}>
+                    <div className={styles.titles}>
+                        <Title1W>课程总述</Title1W>
+                        <Title1W>Course Introduction</Title1W>
+                    </div>
+                    <MainTextW>
+                        专业目前有国家精品资源共享课、国家视频公开课各1门，国家级工程实践教育中心1个，浙江省精品在线开放课程2门，19门数字教学课件获全国、省级奖项，教材10余本，以及《设计图学》、《工业设计手绘》等另10门在线开放课程在建培育。近几年教学成果“艺术设计类课程E-CO数字化生态环境构建及其学习模式改革”、“行业特色地方高校本科拔尖人才培养的探索与实践”均获国家教学成果奖二等奖，另有浙江省教学成果奖4项，中国纺织工业联合会教学成果奖6项，浙江省高校“互联网+教学”优秀案例一等奖1项。
+                    </MainTextW>
+                </div>
+            </MainLayout>
             <Footer/>
 
         </div>

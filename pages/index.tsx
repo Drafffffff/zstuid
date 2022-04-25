@@ -19,7 +19,7 @@ import {
     Talent,
     FeaturesW,
     tidyUrl,
-    Titleswe, MainTextW
+    Titleswe, MainTextW, TalentW,TitlesweW
 } from "../components/utils";
 import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import Box from "../components/BoxM";
@@ -51,7 +51,7 @@ const Home: NextPage = ({
                         <HomeContent/>
                     </div>
                     <div className={styles.circle}/>
-                    <Box/>
+                    <Box left={0}/>
                 </div>
                 <div className={styles.swipper}>
                     <BannerM bannerData={banner}/>
@@ -86,17 +86,22 @@ const Home: NextPage = ({
             <MainLayout>
                 <div className={styles.mainGraphW}>
                     <div className={styles.texts}>
-                        {/*<HomeContentW/>*/}
+                        <HomeContentW/>
                     </div>
-                    <div className={styles.circle}/>
-                    <Box/>
+                    <Box left={5}/>
                 </div>
                 <div className={styles.swipperW}>
                     <BannerM bannerData={banner}/>
                 </div>
+                <div className={styles.featureW}>
+                    <div className={styles.title}>
+                        <TitlesweW zh="特色优势" en="Features and advantages"/>
+                    </div>
+                    <FeaturesW content={features}/>
+                </div>
                 <div className={styles.historyW}>
                     <div className={styles.title}>
-                        <Titleswe zh="历史沿革" en="Development History"/>
+                        <TitlesweW zh="历史沿革" en="Development History"/>
                     </div>
                     <HistoryW historyData={histories}/>
                     <div className={styles.content}>
@@ -105,15 +110,10 @@ const Home: NextPage = ({
                         </MainTextW>
                     </div>
                 </div>
-                <div className={styles.featureW}>
-                    <div className={styles.title}>
-                        <Titleswe zh="特色优势" en="Features and advantages"/>
-                    </div>
-                    <FeaturesW content={features}/>
-                </div>
+
                 <div className={styles.honorW}>
                     <div className={styles.title}>
-                        <Titleswe zh="荣誉与成果" en="Honor and Achievement"/>
+                        <TitlesweW zh="荣誉与成果" en="Honor and Achievement"/>
                     </div>
                     <div className={styles.honorImg}>
                         <Image src={tidyUrl(honor)} alt={"honor"} width={1200} height={714.42}/>
@@ -121,9 +121,9 @@ const Home: NextPage = ({
                 </div>
                 <div className={styles.talentW}>
                     <div className={styles.title}>
-                        <Titleswe zh="人才培养" en="Cultivation of talents"/>
+                        <TitlesweW zh="人才培养" en="Cultivation of talents"/>
                     </div>
-                    <Talent talents={talents}/>
+                    <TalentW talents={talents}/>
                 </div>
             </MainLayout>
             <Footer/>

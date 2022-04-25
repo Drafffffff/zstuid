@@ -12,7 +12,7 @@ import Head from "next/head";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import Like from "../../../components/Likes";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import PreNext from "../../../components/PreNext";
 import GraduationP52022 from "../../../components/2022graduationP5";
 import Footer from "../../../components/Footer";
@@ -52,6 +52,14 @@ const WorkDetail: NextPage = ({
         });
     }
 
+    const preambleRef = useRef<HTMLDivElement>(null)
+    const preambleWRef = useRef<HTMLDivElement>(null)
+    const [pw, setPw] = useState<number>(0)
+    const [pwW, setPwW] = useState<number>(0)
+    useEffect(() => {
+        setPw(preambleRef.current?.clientWidth as number)
+        setPwW(preambleWRef.current?.clientWidth as number)
+    }, [pw, pwW])
     return (
         <div>
             <Head>
@@ -67,8 +75,8 @@ const WorkDetail: NextPage = ({
                         alt={"imageTitle"}
                     />
                 </div>
-                <div className={styles.preamble}>
-                    <GraduationP52022  />
+                <div className={styles.preamble} ref={preambleRef}>
+                    <GraduationP52022 fatherWidth={pw}/>
                 </div>
                 <div className={styles.mobileContainer}>
                     <div className={styles.title}>

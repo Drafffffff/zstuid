@@ -26,8 +26,15 @@ export const MainTextW: React.FC<IProps> = ({children}) => {
 export const MainTexts: React.FC<IProps> = ({children}) => {
     return <div className={styles.mainTexts}>{children}</div>;
 };
+
+export const MainTextsW: React.FC<IProps> = ({children}) => {
+    return <div className={styles.mainTextsW}>{children}</div>;
+};
 export const Title1: React.FC<IProps> = ({children}) => {
     return <div className={styles.title1}>{children}</div>;
+};
+export const Title1W: React.FC<IProps> = ({children}) => {
+    return <div className={styles.title1W}>{children}</div>;
 };
 export const Title2: React.FC<IProps> = ({children}) => {
     return <div className={styles.title2}>{children}</div>;
@@ -37,6 +44,10 @@ export const Title3: React.FC<IProps> = ({children}) => {
 };
 export const CardTitle: React.FC<IProps> = ({children}) => {
     return <div className={styles.cardTitle}>{children}</div>;
+};
+
+export const CardTitleW: React.FC<IProps> = ({children}) => {
+    return <div className={styles.cardTitleW}>{children}</div>;
 };
 
 export const tidyUrl = (url: string): string => {
@@ -556,6 +567,15 @@ export const Titleswe: React.FC<TProps> = ({zh, en}) => {
     );
 };
 
+
+export const TitlesweW: React.FC<TProps> = ({zh, en}) => {
+    return (
+        <div>
+            <Title1W>{zh}</Title1W>
+            <Title1W>{en}</Title1W>
+        </div>
+    );
+};
 export const StudioDirectionM: React.FC<TProps> = ({zh, en}) => {
     return (
         <div className={styles.StudioDirectionContainer}>
@@ -630,6 +650,35 @@ export const Talent: React.FC<TalentProps> = ({talents}) => {
                     </div>
                 </div>
             ))}
+        </div>
+    )
+}
+
+export const TalentW: React.FC<TalentProps> = ({talents}) => {
+    return (
+        <div className={styles.talentW}>
+            <MainTextW>
+                本专业在专业建设、人才培养等方面获得了第三方机构的积极评价，2018专业排名全国25名/245（武书连2018大学本科专业排行榜），2019专业排名全国10名/223（2019中国大学本科教育分专业竞争力排行榜），专业评估为五星专业。学生创新实践能力强，社会需求量大，近年来学生获得国内外工业设计重要赛事奖项近200项，包括全球红点至尊奖、IF概念奖等，并在浙江省大学生工业设计大赛中，学生历年参赛一等奖获奖率占一等奖总数的50%左右，位列省属院校的第一名；在教师指导下获得国家发明专利近70余项，国家级、省级学生科技创新项目立项近20项等。
+            </MainTextW>
+            <MainTextW>
+                据《浙江省高校毕业生就业跟踪调查》报告，以及座谈、问卷、单位访问等多种形式调查显示：
+            </MainTextW>
+            <div className={styles.container}>
+                <div >
+                    <img src={require("/public/img/aboutUs/circles.png").default.src} alt={"circle"} className={styles.img}/>
+                </div>
+                <div className={styles.items}>
+                    {talents.map((talentItem, index) => (
+                        <div key={index}>
+                            <div className={styles.title}>{talentItem.title}</div>
+                            <div
+                                className={styles.content}>
+                                {talentItem.content}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }
@@ -732,7 +781,7 @@ export const FeaturesW: React.FC<FeatureMProps> = ({content}) => {
     const ref = useRef(null);
     const itemsRef = useRef([])
     const textitemsRef = useRef([])
-    useLayoutEffect(() => {
+    useEffect(() => {
         itemsRef.current = itemsRef.current.slice(0, content.length);
         const element = ref.current;
         const tl = gsap.timeline(
@@ -970,7 +1019,7 @@ export const HistoryW: React.FC<historyProps> = ({historyData}) => {
                 // markers: true,
                 scrub: 0.2,
                 start: "center 80%",
-                end: "+=50%",
+                end: "+=500",
                 // pin: true,
 
             },
@@ -986,7 +1035,7 @@ export const HistoryW: React.FC<historyProps> = ({historyData}) => {
             y: -100,
             color: "#f0fe97",
             opacity: 1,
-            scale: 2,
+            scale: 3,
             ease: CustomEase.create("custom", "M0,0,C0,0,0.198,1,0.5,1,0.8,1,1,0,1,0"),
             paused: true
         })
@@ -1143,7 +1192,7 @@ export const BannerM: React.FC<bannerProps> = ({bannerData}) => {
             } else if (count === 2) {
                 changeRight()
             }
-        }, 3000)
+        }, 5000)
 
 
         return () => clearInterval(intervalId);
@@ -1209,14 +1258,20 @@ export const HomeContent: React.FC<HomeContentProp> = () => {
 
 
 export const HomeContentW: React.FC<HomeContentProp> = () => {
-    const content = [`浙江省“十二五”“十三五”
-    新兴特色专业`, `国家级一流本科专业建设点`, `教育部卓越工程师培养计划专业`, `培养能服务并引领数字智能及制造行业发展需求的具有人文关怀和社会责任感的复合型工业设计卓越人才`]
+    const content = [`[ 浙江省“十二五”“十三五”
+    新兴特色专业 ]`, `[ 国家级一流本科专业建设点][教育部卓越工程师培养计划专业 ]`, `[ 培养能服务并引领数字智能及制造行业发展需求的具有人文关怀和社会责任感的复合型工业设计卓越人才 ]`]
     return (
         <div className={styles.homeContentW}>
             <div className={`${styles.text1W} ${styles.textW}`}>{content[0]}</div>
             <div className={`${styles.text2W} ${styles.textW}`}>{content[1]}</div>
-            <div className={`${styles.text3W} ${styles.textW}`}>{content[2]}</div>
-            <div className={`${styles.text4W} ${styles.textW}`}>{content[3]}</div>
+            <div className={`${styles.text3W} ${styles.textW}`}>
+                {/*<div className={styles.p1}>DEPARTMENT OF</div>*/}
+                {/*<div className={styles.p2}>INDUSTRIAL</div>*/}
+                {/*<div className={styles.p3}>DESIGN</div>*/}
+                {/*<div className={styles.p4}>浙江理工大学工业设计系</div>*/}
+                <img src={require("/public/img/aboutUs/title.png").default.src} alt={"title"} className={styles.img}/>
+            </div>
+            <div className={`${styles.text4W} ${styles.textW}`}>{content[2]}</div>
         </div>
     )
 }

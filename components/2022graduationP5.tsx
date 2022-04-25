@@ -4,7 +4,8 @@ import dynamic from 'next/dynamic'
 const Sketch = dynamic(import('react-p5'), {ssr: false})
 import React, {useEffect, useState} from "react";
 import {useWindowSize} from "usehooks-ts";
-import {tidyUrl} from "./utils"; //Import this for typechecking and intellisense
+import {tidyUrl} from "./utils";
+import p5 from "p5"; //Import this for typechecking and intellisense
 
 interface ComponentProps {
 }
@@ -15,19 +16,23 @@ let img1: p5Types.Image | p5Types.MediaElement | p5Types.Graphics,
     img2: p5Types.Image | p5Types.MediaElement | p5Types.Graphics,
     img3: p5Types.Image | p5Types.MediaElement | p5Types.Graphics;
 let theta = 0;
-let a = 0.0;
+let a = 0;
 let b = 2;
 let c = 3;
 let inc = 0.01;
 const zpos = 180;
 let width = 0;
 
-const GraduationP52022: React.FC<ComponentProps> = (props) => {
-    const ws = useWindowSize()
+interface ComponentProps {
+    fatherWidth: number
+}
 
+const GraduationP52022: React.FC<ComponentProps> = ({fatherWidth}) => {
+    const [width, setWs] = useState(fatherWidth)
     useEffect(() => {
-        width = ws.width;
-    }, [ws])
+        setWs(fatherWidth);
+    }, [fatherWidth])
+
     const setup = (p5: p5Types, canvasParentRef: Element) => {
         // use parent to render the canvas in this ref
         // (without that p5 will render the canvas outside of your component)
@@ -104,6 +109,7 @@ const GraduationP52022: React.FC<ComponentProps> = (props) => {
     const windowResized = (p5: p5Types) => {
         p5.resizeCanvas(width, width)
     }
+
     return <Sketch setup={setup} draw={draw} windowResized={windowResized}/>
 
 }

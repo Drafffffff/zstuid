@@ -5,11 +5,17 @@
 
 .main {
   background-color: black;
+  overflow: hidden;
 }
-.container{
+
+.container {
   display: block;
-  margin:auto;
+  margin: auto;
+  background-image: url("../public/img/aboutUs/bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
 }
+
 .mobileContainer {
   overflow: hidden;
   width: 100%;
@@ -18,8 +24,9 @@
   background-repeat: no-repeat;
   background-size: 100% auto;
 }
+
 @media only screen and (max-width: 800px) {
-  .container{
+  .container {
     display: none;
   }
   .mobileContainer {

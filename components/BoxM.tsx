@@ -128,7 +128,6 @@ const Cubes: FC<cubeProps> = (props) => {
         const time = state.clock.getElapsedTime()
         const scale = 4.5 + Math.sin(time * 1.5) * 2
         const curPos = getCubePos(scale)
-
         // @ts-ignore
         groupRef.current.rotation.x = Math.sin(time / 4) / 2
         // @ts-ignore
@@ -279,8 +278,10 @@ const Cubes: FC<cubeProps> = (props) => {
     )
 }
 
-
-const Box: NextPage = () => {
+interface BoxProp{
+    left:number
+}
+const Box: FC<BoxProp> = ({left}) => {
     const sizes = useWindowSize()
     return (
         <Canvas camera={{position: [0, 0, 30]}} className={styles.threeBox}>
@@ -295,7 +296,7 @@ const Box: NextPage = () => {
                     near={0.1}
                     far={100}
                 >
-                    <Cubes position={[0, 2, 0]}/>
+                    <Cubes position={[left, 2, 0]}/>
                 </perspectiveCamera>
                 {/*<BoxItem position={[0, 0, 0]}/>*/}
                 {/*<axesHelper scale={10}/>*/}
