@@ -5,7 +5,7 @@ import {
 } from "next";
 import Image from "next/image";
 import MobileLayout from "../../../components/MobileLayout";
-import {BilibiliVideo, LOCAL_URL, MainTexts, Title1} from "../../../components/utils";
+import {ArticleTitle, BilibiliVideo, LOCAL_URL, MainTexts, MainTextsW, Title1} from "../../../components/utils";
 import styles from "../../../styles/graduaexhibition.module.scss";
 import MobileContent from "../../../components/MobileContent";
 import Head from "next/head";
@@ -19,6 +19,8 @@ import GraduationP52022W from "../../../components/2022graduationP5W";
 import Footer from "../../../components/Footer";
 import Navbar from "../../../components/Navbar";
 import MainLayout from "../../../components/MainLayout";
+import Content from "../../../components/Content";
+import PreNextW from "../../../components/PreNextW";
 
 moment.locale("zh-cn");
 // import * as matter from "gray-matter";
@@ -113,32 +115,27 @@ const WorkDetail: NextPage = ({
                         objectFit={"inherit"}
                     />
                 </div>
-                <div className={styles.preambleW} ref={preambleWRef} style={{height: pwW - 150 - pwW / 4}}>
-                    <div className={styles.P5container}>
-                        <GraduationP52022W fatherWidth={pwW}/>
-                    </div>
-                </div>
-                <div className={styles.mobileContainer}>
+
+                <div className={styles.container}>
                     <div className={styles.title}>
-                        <Title1>{title}</Title1>
+                        <ArticleTitle>{title}</ArticleTitle>
                     </div>
                     <div className={styles.info}>
-                        <MainTexts>{`发布于 ${pubilshedTime.calendar()}　${author}`}</MainTexts>
+                       {`发布于 ${pubilshedTime.calendar()}　${author}`}
                     </div>
                     <article className={styles.content}>
-                        <MobileContent content={content}/>
+                        <Content content={content}/>
                     </article>
-
                     <div className={styles.video} style={{display: videourl === null ? "none" : "block"}}>
                         {/*<BilibiliVideo bv={videourl}/>*/}
                     </div>
-                    <Like
+                    <div className={styles.likes}><Like
                         likeTimes={likeTimes}
                         handleLike={() => {
                             handleLike().then(r => null);
                         }}
-                    />
-                    <PreNext neighbor={neighber} urlPre="/graduaexhibition/"/>
+                    /></div>
+                    <PreNextW neighbor={neighber} urlPre="/graduaexhibition/"/>
                 </div>
             </MainLayout>
 

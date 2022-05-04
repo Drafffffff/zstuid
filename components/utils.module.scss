@@ -107,6 +107,28 @@
     color: #000;
   }
 }
+
+.articleTitle {
+  color: #f0fe97;
+  font-size: 3rem;
+  line-height: 3rem;
+  text-align: justify;
+  font-weight: bold;
+  text-justify: distribute-all-lines;
+
+  & ::after {
+    content: "";
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0;
+  }
+
+  &::selection {
+    background: #fff;
+    color: #000;
+  }
+}
 .title1W {
   color: #f0fe97;
   font-size: 30px;

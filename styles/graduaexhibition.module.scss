@@ -123,7 +123,27 @@
     overflow: hidden;
   }
 }
+.container{
+  max-width: 1200px;
+  position: relative;
+  z-index: 2;
+  margin: 50px auto auto auto;
+  .title{
+    margin-bottom: 20px;
+  }
+  .info{
+    color: #d2d2d2 ;
+    font-size: 0.8rem;
+    margin-bottom: 50px;
+  }
+  .content{
+    padding:0 0px 0;
 
+  }
+  .likes{
+    margin-bottom: 200px;
+  }
+}
 
 .imgTitle {
   margin-top: 50px;

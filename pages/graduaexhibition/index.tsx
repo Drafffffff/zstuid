@@ -138,7 +138,7 @@ const Index: NextPage = ({
     );
 };
 export const getServerSideProps: GetServerSideProps = async context => {
-    const res = await fetch(`http://${LOCAL_URL}:1337/graduation-works`);
+    const res = await fetch(`http://${LOCAL_URL}:1337/graduation-works?_sort=published_at:DESC`);
     const data = await res.json();
     // console.log(data);
     const works = data.map((a: any) => ({

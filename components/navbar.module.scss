@@ -16,6 +16,13 @@
       margin-left: 120px;
       font-size: 20px;
       user-select: none;
+      //transition: all 0.2s ease-in-out;
+      &:hover{
+        //color: #f0fe97;
+        font-weight: bolder;
+        text-decoration: #ffffff underline;
+
+      }
     }
   }
 }

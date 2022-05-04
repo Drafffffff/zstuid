@@ -3,8 +3,10 @@ import Image from "next/image";
 import { FC, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { codeHightLight, MainText, tidyUrl } from "./utils";
+import {codeHightLight, MainText, MainTextW, tidyUrl} from "./utils";
 import styles from "./MobileContent.module.scss";
+
+// @ts-ignore
 interface Iprops {
   // children: ReactNode;
   content: string;
@@ -32,13 +34,23 @@ const MobileContent: FC<Iprops> = ({ content }) => {
               </code>
             );
           },
-          p: ({ node, children }) =>{
-            const cNode:any = node.children[0];
-            if (cNode.tagName === "img") {
-              const image: any = node.children[0];
-              return (
-                <div className={styles.imageContainer}>
-                  {/* <Image
+            p: ({node, children}) => {
+                const cNode: any = node.children[0];
+                if (cNode.tagName === "img") {
+                    const image: any = node.children[0];
+                    if (image.properties.src.slice(-3) == "mp4") {
+                        return (
+                            <div>
+                                <video  controls className={styles.video}>
+                                    <source src={`${tidyUrl(image.properties.src)}`} type="video/mp4"/>
+                                </video>
+
+                            </div>
+                        )
+                    } else {
+                        return (
+                            <div className={styles.imageContainer}>
+                                {/* <Image
                     src={`${tidyUrl(image.properties.src)}`}
                     alt={image.properties.alt}
                     width="100%"
@@ -47,17 +59,18 @@ const MobileContent: FC<Iprops> = ({ content }) => {
                     objectFit="cover"
                     className={styles.image}
                   /> */}
-                  <img
-                    src={`${tidyUrl(image.properties.src)}`}
-                    alt={image.properties.alt}
-                    className={styles.image}
-                  />
-                </div>
-              );
-            } else {
-              return <MainText>{children}</MainText>;
+                                <img
+                                    src={`${tidyUrl(image.properties.src)}`}
+                                    alt={image.properties.alt}
+                                    className={styles.image}
+                                />
+                            </div>
+                        );
+                    }
+                } else {
+                    return <MainText>{children}</MainText>;
+                }
             }
-          }
             // node.children.map((e,index) => {
             //   if (e.tagName === "img") {
             //     const image: any = e;
@@ -92,5 +105,7 @@ const MobileContent: FC<Iprops> = ({ content }) => {
     </div>
   );
 };
+
+
 
 export default MobileContent;
