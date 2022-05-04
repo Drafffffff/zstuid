@@ -172,7 +172,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     //  /course-works?published_at_gt=2022-04-11T20:02:37.280Z&_sort=published_at:ASC&_limit=1
     //next
     // /course-works?published_at_lt=2022-04-12T13:24:09.828Z&_sort=published_at:DESC&_limit=1
-    const res = await fetch(`http://localhost:1337/course`);
+    const res = await fetch(`http://${LOCAL_URL}:1337/course`);
     const data = await res.json();
     const key = context.params?.id as keyof cd;
     const content = data[key];
@@ -182,7 +182,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     const imageUrl = content.cover.url;
     const titleImageUrl = content.titleImage.url;
     const worksRes = await fetch(
-        `http://localhost:1337/course-works?course_category=${courseid[key].id}&_sort=published_at:DESC`
+        `http://${LOCAL_URL}:1337/course-works?course_category=${courseid[key].id}&_sort=published_at:DESC`
     );
     const workData = await worksRes.json();
     const works = workData.map((e: worksInfo) => ({

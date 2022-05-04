@@ -5,34 +5,40 @@
   justify-content: center;
   margin-bottom: 30px;
 }
+
 .categories {
   position: relative;
   width: 100%;
   height: 250px;
+
   .fwsjyshcx {
     position: absolute;
     left: 23px;
     top: 0px;
     animation: bounce-down 3s linear infinite;
   }
+
   .szwc {
     position: absolute;
     left: 130px;
     top: 0px;
     animation: bounce-down 4.6s linear infinite;
   }
+
   .kcxsj {
     position: absolute;
     right: 23px;
     top: 0px;
     animation: bounce-down 7s linear infinite;
   }
+
   .jjsj {
     position: absolute;
     left: 52px;
     top: 106px;
     animation: bounce-down 4s linear infinite;
   }
+
   .qdyjs {
     position: absolute;
     right: 70px;
@@ -40,14 +46,17 @@
     animation: bounce-down 5s linear infinite;
   }
 }
+
 .overviewTitles {
   padding: 0 40px;
   margin-bottom: 20px;
 }
+
 .overview {
   padding: 0 40px;
   margin-bottom: 30px;
 }
+
 .resultsTitle {
   padding: 0 40px;
   margin-bottom: 20px;
@@ -57,6 +66,7 @@
   padding: 0 40px;
   margin-bottom: 20px;
 }
+
 .intro {
   padding: 0 40px;
   margin-bottom: 30px;
@@ -71,6 +81,7 @@
   padding: 0 40px;
   margin-bottom: 40px;
 }
+
 .personnelTitle {
 
   padding: 0 40px;
@@ -92,6 +103,125 @@
   margin-bottom: 30px;
 }
 
+
+.navW {
+  margin-bottom: 200px;
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100vw;
+    transform: translateY(-2px);
+
+    .mid {
+      flex: 1 1;
+      width: 100%;
+      height: 249.5px;
+
+      .square {
+        width: 0;
+        height: 100%;
+        background-color: #f0fe97;
+
+      }
+    }
+  }
+
+
+  .select {
+    width: 100%;
+    height: 250px;
+    max-width: 1200px;
+    display: flex;
+    margin: 0 auto 100px auto;
+    justify-content: center;
+    align-items: center;
+
+    .choice {
+      user-select: none;
+      //width: 100%;
+      //height: 20%;
+      height: 240px;
+      width: 20%;
+      position: relative;
+      margin-top: 200px;
+    }
+
+    .gongyesheji {
+      animation: bounce-down 4.6s linear infinite;
+    }
+
+    .jichusheji {
+
+      animation: bounce-down 5s linear infinite;
+    }
+
+    .shejituxue {
+
+      animation: bounce-down 4s linear infinite;
+    }
+
+    .yuanxinkongzhi {
+
+      animation: bounce-down 5.2s linear infinite;
+    }
+
+    .renjigongcheng {
+
+      animation: bounce-down 4.5s linear infinite;
+    }
+  }
+}
+
+.contentW {
+  // padding-bottom: 30px;
+  transition: opacity 1s ease-out;
+  opacity: 1;
+  max-width: 1200px;
+  margin: 0 auto 0 auto;
+
+  .titles {
+    margin-bottom: 50px;
+  }
+
+  .overViewImg {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+
+  .resultTW {
+    margin-bottom: 50px;
+
+    .resultTitleW {
+      margin-top: 50px;
+      font-size: 1.5rem;
+      font-weight: lighter;
+      line-height: 2rem;
+
+      &:before {
+        content: "";
+        display: inline-block;
+        height: 4rem;
+        width: 10px;
+        background-color: #f0fe97;
+        position: absolute;
+        transform: translateX(-150%);
+      }
+
+      .resultTitleZHW {
+
+      }
+
+      .resultTitleENW {
+
+      }
+    }
+
+  }
+}
 
 @keyframes bounce-down {
   25% {

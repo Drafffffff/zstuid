@@ -100,7 +100,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     // Fetch data from external API
     const matter = require("gray-matter");
     const pageid = context.params?.id;
-    const res = await fetch(`http://localhost:1337/news-centers/${pageid}`);
+    const res = await fetch(`http://${LOCAL_URL}:1337/news-centers/${pageid}`);
     const data = await res.json();
     const id = data.id;
     const title = data.title;
@@ -116,8 +116,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
     //next
     // /course-works?published_at_lt=2022-04-12T13:24:09.828Z&_sort=published_at:DESC&_limit=1
 
-    const preUrl = `http://localhost:1337/news-centers?published_at_gt=${published_at}&_sort=published_at:ASC&_limit=1`;
-    const nextUrl = `http://localhost:1337/news-centers?published_at_lt=${published_at}&_sort=published_at:DESC&_limit=1`;
+    const preUrl = `http://${LOCAL_URL}:1337/news-centers?published_at_gt=${published_at}&_sort=published_at:ASC&_limit=1`;
+    const nextUrl = `http://${LOCAL_URL}:1337/news-centers?published_at_lt=${published_at}&_sort=published_at:DESC&_limit=1`;
     const preData = await (await fetch(preUrl)).json();
     const nextData = await (await fetch(nextUrl)).json();
     const neighber = {

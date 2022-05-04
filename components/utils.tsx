@@ -1426,4 +1426,4 @@ export const HomeContentW: React.FC<HomeContentProp> = () => {
   );
 };
 
-export const LOCAL_URL = "10.12.3.72";
+export const LOCAL_URL = "diid.zstu.edu.cn";

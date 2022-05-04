@@ -6,7 +6,7 @@ const nextConfig = {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
-    domains: ["127.0.0.1", "localhost", "192.168.1.4", "10.12.3.72"],
+    domains: ["127.0.0.1", "localhost", "192.168.1.4", "10.12.3.72","diid.zstu.edu.cn"],
   },
   typescript: {
     // !! WARN !!

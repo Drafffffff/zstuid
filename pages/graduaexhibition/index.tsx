@@ -9,6 +9,7 @@ import {GetServerSideProps, InferGetServerSidePropsType} from "next";
 import React, {useEffect, useRef, useState} from "react";
 import MobileCards from "../../components/MobileCards";
 import GraduationP52022 from "../../components/2022graduationP5";
+import GraduationP52022W from "../../components/2022graduationP5W";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import Cards from "../../components/Cards";
@@ -19,8 +20,8 @@ const Index: NextPage = ({
     const [currentPage, SetCurrentPage] = useState(1);
     const ItemPerPage = 12;
     const ItemPerPageW = 28;
-    const totalPagesCount = Math.ceil(works.length / ItemPerPage);
     const totalPagesCountW = Math.ceil(works.length / ItemPerPageW);
+    const totalPagesCount = Math.ceil(works.length / ItemPerPage);
     const preambleRef = useRef<HTMLDivElement>(null)
     const preambleWRef = useRef<HTMLDivElement>(null)
     const [pw, setPw] = useState<number>(0)
@@ -93,7 +94,7 @@ const Index: NextPage = ({
                 </div>
                 <div className={styles.preambleW} ref={preambleWRef} style={{height: pwW - 150 - pwW / 4}}>
                     <div className={styles.P5container}>
-                        <GraduationP52022 fatherWidth={pwW}/>
+                        <GraduationP52022W fatherWidth={pwW}/>
                     </div>
                 </div>
                 <div className={styles.preambleTitleW}>

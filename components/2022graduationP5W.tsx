@@ -73,7 +73,7 @@ const GraduationP52022: React.FC<ComponentProps> = ({fatherWidth}) => {
         p5.pop();
 
         p5.push();
-        // p5.translate(0, 0, width/3);
+        p5.translate(0, 0, width/3);
         p5.stroke(240, 254, 151);
         p5.strokeWeight(0.5);
         p5.translate(0, 0, zpos - 1);
@@ -93,7 +93,7 @@ const GraduationP52022: React.FC<ComponentProps> = ({fatherWidth}) => {
 
 
         p5.push();
-        // p5.translate(width*0.3, width*0.3, 1.5*width);
+        p5.translate(0, 0, width/3);
         p5.noStroke()
         p5.translate(0, 0, zpos);
         p5.ellipse(p5.cos(a) * 0.125 * width, p5.sin(a) * 0.125 * width, width * 0.08 / 2.8, width * 0.08 / 2.8, 50);

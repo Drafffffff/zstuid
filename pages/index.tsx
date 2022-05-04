@@ -121,7 +121,7 @@ const Home: NextPage = ({
                 </div>
                 <div className={styles.talentW}>
                     <div className={styles.title}>
-                        <TitlesweW zh="人才培养" en="Cultivation of talents"/>
+                        <TitlesweW zh="人才培养" en="Cultivation of Talents"/>
                     </div>
                     <TalentW talents={talents}/>
                 </div>

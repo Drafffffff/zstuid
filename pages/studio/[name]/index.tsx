@@ -11,7 +11,7 @@ import Head from "next/head";
 import {
     StudioDirectionM,
     Titleswe,
-    StudioDirectionPersonCardM, tidyUrl, PageNav,
+    StudioDirectionPersonCardM, tidyUrl, PageNav, LOCAL_URL,
 } from "../../../components/utils";
 import {useRouter} from "next/router";
 import React, {useEffect, useState} from "react";
@@ -131,7 +131,7 @@ const Pages: NextPage = ({
 
 export const getServerSideProps: GetServerSideProps = async context => {
         const key = context.params?.name as string;
-        const res = await fetch(`http://127.0.0.1:1337/studio`);
+        const res = await fetch(`http://${LOCAL_URL}:1337/studio`);
         const data = await res.json();
         // console.log(data[key]);
         const describe = data[key].describe;
@@ -140,7 +140,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
         const coverUrl = data[key].cover.url;
 
         // @ts-ignore
-        const worksres = await fetch(`http://127.0.0.1:1337/studio-works?studio_category=${coursesId[key]}`)
+        const worksres = await fetch(`http://${LOCAL_URL}:1337/studio-works?studio_category=${coursesId[key]}`)
         const worksData = await worksres.json()
         const works = worksData?.map((a: any) => ({
             title: a.title,

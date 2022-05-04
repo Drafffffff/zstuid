@@ -11,10 +11,12 @@ import MainLayout from "../../components/MainLayout";
 import MobileLayout from "../../components/MobileLayout";
 import Link from "next/link";
 import MobileCards from "../../components/MobileCards";
-import React, {useState} from "react";
-import {BannerM, PageNav, Titleswe} from "../../components/utils";
+import React, {useEffect, useRef, useState} from "react";
+import {BannerM, LOCAL_URL, MainTextW, PageNav, Title1W, Titleswe, TitlesweW} from "../../components/utils";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import gsap from "gsap";
+import Cards from "../../components/Cards";
 
 const News: NextPage = ({
                             news,
@@ -23,7 +25,23 @@ const News: NextPage = ({
     const [currentPage, SetCurrentPage] = useState(1);
     const ItemPerPage = 12;
     const totalPagesCount = Math.ceil(news.length / ItemPerPage);
+    const titleSquare = useRef<HTMLDivElement>(null);
+    const [linkHover, setLinkHover] = useState(0)
+    const ItemPerPageW = 28;
+    const totalPagesCountW = Math.ceil(news.length / ItemPerPageW);
 
+    const handleMouseOver = (i: number) => {
+        setLinkHover(i)
+    }
+    const handleMouseLeave = () => {
+        setLinkHover(0)
+    }
+    useEffect(() => {
+        gsap.to(titleSquare.current, {
+            width: "95%",
+            duration: 3
+        })
+    }, [])
     return (
         <div>
             <Head>
@@ -101,6 +119,117 @@ const News: NextPage = ({
                     />
                 </div>
             </MobileLayout>
+            <MainLayout>
+                <div className={styles.navW}>
+                    <div className={styles.title}>
+                        <div className={styles.left}>
+                            <Image src={require("/public/img/news/NE.png")} alt={"titleL"}/>
+                        </div>
+                        <div className={styles.mid}>
+                            <div className={styles.square} ref={titleSquare}/>
+                        </div>
+                        <div className={styles.right}>
+                            <Image src={require("/public/img/news/WS.png")} alt={"titleR"}/>
+                        </div>
+                    </div>
+                    <div className={styles.select}>
+                        <Link href={"/news/tongzhi"}>
+                            <a className={`${styles.choice} ${styles.tongzhi}`}
+                               onMouseOver={() => {
+                                   handleMouseOver(1)
+                               }}
+                               onMouseLeave={() => {
+                                   handleMouseLeave()
+                               }}>
+                                <Image
+                                    src={require("../../public/img/news/select/tongzhi.svg")}
+                                    alt="工业设计手绘"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                />
+                                <Image
+                                    src={require("../../public/img/news/select/tongzhiH.svg")}
+                                    alt="工业设计手绘"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                    style={{visibility: linkHover === 1 ? "visible" : "hidden"}}
+                                />
+                            </a>
+                        </Link>
+                        <Link href={"/news/zhanxun"}>
+                            <a className={`${styles.choice} ${styles.zhanxun}`}
+                               onMouseOver={() => {
+                                   handleMouseOver(2)
+                               }}
+                               onMouseLeave={() => {
+                                   handleMouseLeave()
+                               }}>
+                                <Image
+                                    src={require("../../public/img/news/select/zhanxun.svg")}
+                                    alt="基础设计"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+
+                                />
+                                <Image
+                                    src={require("../../public/img/news/select/zhanxunH.svg")}
+                                    alt="基础设计"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                    style={{visibility: linkHover === 2 ? "visible" : "hidden"}}
+                                />
+                            </a>
+                        </Link>
+                        <Link href={"/news/jiangzuo"}>
+                            <a className={`${styles.choice} ${styles.jiangzuo}`}
+                               onMouseOver={() => {
+                                   handleMouseOver(3)
+                               }}
+                               onMouseLeave={() => {
+                                   handleMouseLeave()
+                               }}>
+                                <Image
+                                    src={require("../../public/img/news/select/jiangzuo.svg")}
+                                    alt="基础设计"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+
+                                />
+                                <Image
+                                    src={require("../../public/img/news/select/jiangzuoH.svg")}
+                                    alt="基础设计"
+                                    layout={"fill"}
+                                    objectFit={"contain"}
+                                    style={{visibility: linkHover === 3 ? "visible" : "hidden"}}
+                                />
+                            </a>
+                        </Link>
+                    </div>
+
+                    <div className={styles.swipperW}>
+                        <BannerM bannerData={banner}/>
+                    </div>
+                </div>
+                <div className={styles.newsTitleW}>
+                    <TitlesweW zh="全部新闻" en="All News"/>
+                </div>
+                <div className={styles.newsW}>
+                    <Cards
+                        works={news.slice(
+                            (currentPage - 1) * ItemPerPageW,
+                            currentPage * ItemPerPageW
+                        )}
+                    />
+                    <div className={styles.pageNav}>
+                        <PageNav
+                            totalPages={totalPagesCountW}
+                            currentPage={currentPage}
+                            setPage={SetCurrentPage}
+                            pathName={`/graduaexhibition`}
+                        />
+                    </div>
+                </div>
+            </MainLayout>
             <Footer/>
 
         </div>
@@ -108,9 +237,9 @@ const News: NextPage = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
-    const res = await fetch(`http://127.0.0.1:1337/news-centers`);
+    const res = await fetch(`http://${LOCAL_URL}:1337/news-centers`);
     const data = await res.json();
-    const bannerRes = await fetch(`http://127.0.0.1:1337/news-banner`);
+    const bannerRes = await fetch(`http://${LOCAL_URL}:1337/news-banner`);
     const bannerData = await bannerRes.json()
     const banner = {
         bannerItem1: {

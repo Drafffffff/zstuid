@@ -15,8 +15,10 @@ import Like from "../../../components/Likes";
 import React, {useEffect, useRef, useState} from "react";
 import PreNext from "../../../components/PreNext";
 import GraduationP52022 from "../../../components/2022graduationP5";
+import GraduationP52022W from "../../../components/2022graduationP5W";
 import Footer from "../../../components/Footer";
 import Navbar from "../../../components/Navbar";
+import MainLayout from "../../../components/MainLayout";
 
 moment.locale("zh-cn");
 // import * as matter from "gray-matter";
@@ -90,7 +92,7 @@ const WorkDetail: NextPage = ({
                     </article>
 
                     <div className={styles.video} style={{display: videourl === null ? "none" : "block"}}>
-                        <BilibiliVideo bv={videourl}/>
+                        {/*<BilibiliVideo bv={videourl}/>*/}
                     </div>
                     <Like
                         likeTimes={likeTimes}
@@ -101,6 +103,44 @@ const WorkDetail: NextPage = ({
                     <PreNext neighbor={neighber} urlPre="/graduaexhibition/"/>
                 </div>
             </MobileLayout>
+
+            <MainLayout>
+                <div className={styles.imageTitleW}>
+                    <Image
+                        src={require("/public/img/graduaexhibition/imageTitle.svg")}
+                        alt="imageTitle"
+                        layout={"fill"}
+                        objectFit={"inherit"}
+                    />
+                </div>
+                <div className={styles.preambleW} ref={preambleWRef} style={{height: pwW - 150 - pwW / 4}}>
+                    <div className={styles.P5container}>
+                        <GraduationP52022W fatherWidth={pwW}/>
+                    </div>
+                </div>
+                <div className={styles.mobileContainer}>
+                    <div className={styles.title}>
+                        <Title1>{title}</Title1>
+                    </div>
+                    <div className={styles.info}>
+                        <MainTexts>{`发布于 ${pubilshedTime.calendar()}　${author}`}</MainTexts>
+                    </div>
+                    <article className={styles.content}>
+                        <MobileContent content={content}/>
+                    </article>
+
+                    <div className={styles.video} style={{display: videourl === null ? "none" : "block"}}>
+                        {/*<BilibiliVideo bv={videourl}/>*/}
+                    </div>
+                    <Like
+                        likeTimes={likeTimes}
+                        handleLike={() => {
+                            handleLike().then(r => null);
+                        }}
+                    />
+                    <PreNext neighbor={neighber} urlPre="/graduaexhibition/"/>
+                </div>
+            </MainLayout>
 
 
             <Footer/>
@@ -113,7 +153,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     // Fetch data from external API
     const matter = require("gray-matter");
     const pageid = context.params?.id;
-    const res = await fetch(`http://localhost:1337/graduation-works/${pageid}`);
+    const res = await fetch(`http://${LOCAL_URL}:1337/graduation-works/${pageid}`);
     const data = await res.json();
     const id = data.id;
     const title = data.title;
@@ -125,8 +165,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
     const author = data.author;
     const likes = data.likes;
 
-    const preUrl = `http://localhost:1337/graduation-works?published_at_gt=${published_at}&_sort=published_at:ASC&_limit=1`;
-    const nextUrl = `http://localhost:1337/graduation-works?published_at_lt=${published_at}&_sort=published_at:DESC&_limit=1`;
+    const preUrl = `http://${LOCAL_URL}:1337/graduation-works?published_at_gt=${published_at}&_sort=published_at:ASC&_limit=1`;
+    const nextUrl = `http://${LOCAL_URL}:1337/graduation-works?published_at_lt=${published_at}&_sort=published_at:DESC&_limit=1`;
     const preData = await (await fetch(preUrl)).json();
     const nextData = await (await fetch(nextUrl)).json();
     const neighber = {

@@ -12,7 +12,6 @@ import Footer from "../components/Footer";
 import gsap from "gsap";
 
 const Course: NextPage = () => {
-    const [linkHover, setLinkHover] = useState(0)
     const titleSquare = useRef(null)
     useEffect(() => {
         gsap.to(titleSquare.current, {
@@ -20,6 +19,7 @@ const Course: NextPage = () => {
             duration: 3
         })
     }, [])
+    const [linkHover, setLinkHover] = useState(0)
 
 
     const handleMouseOver = (i: number) => {

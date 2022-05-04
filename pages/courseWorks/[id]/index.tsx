@@ -101,7 +101,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
     // Fetch data from external API
     const matter = require("gray-matter");
     const pageid = context.params?.id;
-    const res = await fetch(`http://localhost:1337/course-works/${pageid}`);
+    const res = await fetch(`http://${LOCAL_URL}:1337/course-works/${pageid}`);
     const data = await res.json();
     const id = data.id;
     const title = data.title;
