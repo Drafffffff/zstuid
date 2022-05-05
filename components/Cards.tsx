@@ -19,14 +19,16 @@ const Cards: FC<Iprops> = ({ works }) => {
 <div>
 <div className={styles.mobileCards}>
       {works.map((value: work, index: number) => (
-        <Card
-          key={index}
-          // imageUrl={"/public/img/test.jpg"}
-          imageUrl={tidyUrl(value.cover.url)}
-          title={value.title}
-          author={value.author}
-          url={value.url}
-        />
+       <div>
+         <Card
+             key={index}
+             // imageUrl={"/public/img/test.jpg"}
+             imageUrl={tidyUrl(value.cover.url)}
+             title={value.title}
+             author={value.author}
+             url={value.url}
+         />
+       </div>
       ))}
     </div>
 </div>

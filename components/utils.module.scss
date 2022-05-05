@@ -24,7 +24,9 @@
 .mainTextW {
   color: white;
   font-size: 18px;
-  line-height: 30px;
+  line-height: 36px;
+  font-weight: lighter;
+  letter-spacing: 2px;
   text-align: justify;
   text-justify: distribute-all-lines;
   margin-bottom: 10px;
@@ -71,7 +73,7 @@
   line-height: 20px;
   text-align: justify;
   text-justify: distribute-all-lines;
-
+  font-weight: lighter;
   & ::after {
     content: "";
     width: 100%;
@@ -111,8 +113,9 @@
 .articleTitle {
   color: #f0fe97;
   font-size: 3rem;
-  line-height: 3rem;
+  line-height: 4.5rem;
   text-align: justify;
+  letter-spacing: 2px;
   font-weight: bold;
   text-justify: distribute-all-lines;
 
@@ -225,13 +228,13 @@
 
 .cardTitleW {
   color: #f0fe97;
-  font-size: 20px;
-  line-height: 25px;
+  font-size: 18px;
+  line-height: 27px;
+  letter-spacing: 1px;
   // text-align: justify;
   font-weight: bold;
   width: 100%;
   text-justify: distribute-all-lines;
-  height: 50px;
   text-overflow: ellipsis;
   overflow: hidden;
   margin-top: 20px;
@@ -281,9 +284,7 @@
 }
 
 .cardW {
-  flex-basis: 25%;
-  padding: 0 0px 0 60px;
-
+  width: 80%;
   .cover {
     overflow: hidden;
     height: 300px;

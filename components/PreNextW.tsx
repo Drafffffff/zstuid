@@ -8,6 +8,7 @@ interface neightorItem {
     title: string;
     id: string;
     imageUrl: string;
+    author: string;
 }
 
 interface Iprops {
@@ -33,14 +34,17 @@ const NoPre: FC<Iprops> = ({neighbor, urlPre}) => {
                             objectFit="cover"
                         />
                     </div>
+                    <img className={styles.arror} src={require("/public/img/utils/Arrow.svg").default.src}/>
 
                     <div className={styles.text}>
-                        <MainTexts>上一篇</MainTexts>
+                        上一篇
                     </div>
                     <div className={styles.title}>
                         <Title2>{neighbor.pre.title}</Title2>
                     </div>
-                    <div className={styles.line}/>
+                    <div className={styles.author}>
+                        {neighbor.pre.author}
+                    </div>
                 </a>
             </Link>
         );
@@ -61,14 +65,19 @@ const NoNext: FC<Iprops> = ({neighbor, urlPre}) => {
                             layout="fill"
                             objectFit="cover"
                         />
+
                     </div>
+                    <img className={styles.arror} src={require("/public/img/utils/Arrow.svg").default.src}/>
+
                     <div className={styles.text}>
-                        <MainTexts> 下一篇</MainTexts>
+                        下一篇
                     </div>
                     <div className={styles.title}>
                         <Title2>{neighbor.next.title}</Title2>
                     </div>
-                    <div className={styles.line}/>
+                    <div className={styles.author}>
+                        {neighbor.next.author}
+                    </div>
                 </a>
             </Link>
         );

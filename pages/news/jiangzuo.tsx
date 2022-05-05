@@ -10,7 +10,7 @@ import styles from "../../styles/news.module.scss";
 import MainLayout from "../../components/MainLayout";
 import MobileLayout from "../../components/MobileLayout";
 import Link from "next/link";
-import {BannerM, PageNav, Titleswe} from "../../components/utils";
+import {BannerM, LOCAL_URL, PageNav, Titleswe} from "../../components/utils";
 import React, {useState} from "react";
 import MobileCards from "../../components/MobileCards";
 import Navbar from "../../components/Navbar";
@@ -71,9 +71,9 @@ const News: NextPage = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
-    const res = await fetch(`http://127.0.0.1:1337/news-centers?news_category=1`);
+    const res = await fetch(`http://${LOCAL_URL}/news-centers?news_category=1`);
     const data = await res.json();
-    const bannerRes = await fetch(`http://127.0.0.1:1337/news-banner`);
+    const bannerRes = await fetch(`http://${LOCAL_URL}/news-banner`);
     const bannerData = await bannerRes.json()
     const banner = {
         bannerItem1: {

@@ -12,7 +12,7 @@ import Head from "next/head";
 import moment from "moment";
 import "moment/locale/zh-cn";
 import Like from "../../../components/Likes";
-import React, {useEffect, useRef, useState} from "react";
+import React, {FC, useEffect, useRef, useState} from "react";
 import PreNext from "../../../components/PreNext";
 import GraduationP52022 from "../../../components/2022graduationP5";
 import GraduationP52022W from "../../../components/2022graduationP5W";
@@ -21,6 +21,7 @@ import Navbar from "../../../components/Navbar";
 import MainLayout from "../../../components/MainLayout";
 import Content from "../../../components/Content";
 import PreNextW from "../../../components/PreNextW";
+import Link from "next/link";
 
 moment.locale("zh-cn");
 // import * as matter from "gray-matter";
@@ -31,9 +32,9 @@ const WorkDetail: NextPage = ({
                                   published_at,
                                   discribe,
                                   content,
-                                  videourl,
                                   author,
                                   likes,
+                                  linkurl,
                                   neighber,
                               }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const pubilshedTime = moment(published_at);
@@ -92,10 +93,6 @@ const WorkDetail: NextPage = ({
                     <article className={styles.content}>
                         <MobileContent content={content}/>
                     </article>
-
-                    <div className={styles.video} style={{display: videourl === null ? "none" : "block"}}>
-                        {/*<BilibiliVideo bv={videourl}/>*/}
-                    </div>
                     <Like
                         likeTimes={likeTimes}
                         handleLike={() => {
@@ -121,20 +118,19 @@ const WorkDetail: NextPage = ({
                         <ArticleTitle>{title}</ArticleTitle>
                     </div>
                     <div className={styles.info}>
-                       {`发布于 ${pubilshedTime.calendar()}　${author}`}
+                        {`发布于 ${pubilshedTime.calendar()}　${author}`}
                     </div>
                     <article className={styles.content}>
                         <Content content={content}/>
                     </article>
-                    <div className={styles.video} style={{display: videourl === null ? "none" : "block"}}>
-                        {/*<BilibiliVideo bv={videourl}/>*/}
-                    </div>
+
                     <div className={styles.likes}><Like
                         likeTimes={likeTimes}
                         handleLike={() => {
                             handleLike().then(r => null);
                         }}
                     /></div>
+                    <Links linkurl={linkurl}></Links>
                     <PreNextW neighbor={neighber} urlPre="/graduaexhibition/"/>
                 </div>
             </MainLayout>
@@ -158,9 +154,9 @@ export const getServerSideProps: GetServerSideProps = async context => {
     // const news_category = data.news_category;
     const discribe = data.describe;
     const content = data.content;
-    const videourl = data.videoUrl;
     const author = data.author;
     const likes = data.likes;
+    const linkurl = data.linkurl;
 
     const preUrl = `http://${LOCAL_URL}:1337/graduation-works?published_at_gt=${published_at}&_sort=published_at:ASC&_limit=1`;
     const nextUrl = `http://${LOCAL_URL}:1337/graduation-works?published_at_lt=${published_at}&_sort=published_at:DESC&_limit=1`;
@@ -173,6 +169,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
                     id: nextData[0].id,
                     title: nextData[0].title,
                     imageUrl: nextData[0].cover.url,
+                    author: nextData[0].author,
                 }
                 : null,
         pre:
@@ -181,6 +178,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
                     id: preData[0].id,
                     title: preData[0].title,
                     imageUrl: preData[0].cover.url,
+                    author: nextData[0].author,
                 }
                 : null,
     };
@@ -194,12 +192,32 @@ export const getServerSideProps: GetServerSideProps = async context => {
             // news_category: news_category,
             discribe: discribe,
             content: matter(content).content,
-            videourl: videourl,
             author: author,
             likes: likes,
             neighber: neighber,
+            linkurl: linkurl
         },
     };
 };
+
+interface LinkProp {
+    linkurl: string
+}
+
+const Links: FC<LinkProp> = ({linkurl}) => {
+    if (linkurl === null) {
+        return <div className={styles.links}/>
+    } else {
+        return (
+            <Link href={linkurl}>
+                <a className={styles.links}>
+                    <span><img src={require("/public/img/graduaexhibition/fa-regular_eye.svg").default.src}
+                               className={styles.linkImg}/></span>
+                    观看线上展览</a>
+            </Link>
+        )
+    }
+
+}
 
 export default WorkDetail;

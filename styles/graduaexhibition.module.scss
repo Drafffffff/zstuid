@@ -141,7 +141,23 @@
 
   }
   .likes{
-    margin-bottom: 200px;
+    margin-bottom: 40px;
+  }
+  .links{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    line-height: 3rem;
+    color: #f0fe97;
+    text-decoration: #f0fe97 underline;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 100px;
+  .linkImg{
+    height: 1.5rem;
+    transform: translateY(2px);
+    margin-right: 10px;
+  }
   }
 }
 

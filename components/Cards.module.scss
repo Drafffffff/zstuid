@@ -8,5 +8,14 @@
   margin-top: 100px;
   //justify-content: space-between;
   flex-wrap: wrap;
-
+  &>div{
+   display: flex;
+    flex-basis: 25%;
+  }
+  div:nth-child(4n){
+  justify-content: flex-start;
+  }
+  div:nth-child(4n+1){
+    justify-content: flex-start;
+  }
 }
