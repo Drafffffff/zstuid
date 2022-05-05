@@ -8,7 +8,6 @@ interface Iprops {
     imageUrl: any;
     title: string;
     author: string;
-    key: number;
     url: string;
 }
 
