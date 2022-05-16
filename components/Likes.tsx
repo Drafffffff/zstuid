@@ -19,7 +19,7 @@ const Like: FC<Iprops> = ({likeTimes, handleLike, ...props}) => {
         username: 'admin',
         password: 'public',
     }
-    const client = mqtt.connect('mqtt://zstu-interaction.art:1883', options)
+    const client = mqtt.connect('ws://zstu-interaction.art:8083/mqtt', options)
 
     function handleMqtt() {
         const data = {total: likeTimes + 1}
