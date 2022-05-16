@@ -14,6 +14,7 @@
     "gray-matter": "^4.0.3",
     "gsap": "^3.10.2",
     "moment": "^2.29.2",
+    "mqtt": "^4.3.7",
     "next": "12.1.4",
     "next-transpile-modules": "^9.0.0",
     "qier-player": "^2.0.2",
