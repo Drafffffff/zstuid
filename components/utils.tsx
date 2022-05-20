@@ -629,18 +629,18 @@ interface VideoProps {
     bv: string;
 }
 
-export const BilibiliVideo: React.FC<VideoProps> = ({bv}) => {
-    return (
-        <div className={styles.bilibili}>
-            <iframe
-                src={`//player.bilibili.com/player.html?bvid=${bv}&page=1&as_wide=1&high_quality=1&danmaku=0`}
-                scrolling="no"
-                frameBorder="no"
-                allowFullScreen={true}
-            />
-        </div>
-    );
-};
+// export const BilibiliVideo: React.FC<VideoProps> = ({bv}) => {
+//     return (
+//         <div className={styles.bilibili}>
+//             <iframe
+//                 src={`//player.bilibili.com/player.html?bvid=${bv}&page=1&as_wide=1&high_quality=1&danmaku=0`}
+//                 scrolling="no"
+//                 frameBorder="no"
+//                 allowFullScreen={true}
+//             />
+//         </div>
+//     );
+// };
 
 interface TalentConatent {
     title: string;

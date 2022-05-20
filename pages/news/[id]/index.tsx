@@ -5,7 +5,7 @@ import {
 } from "next";
 import Image from "next/image";
 import MobileLayout from "../../../components/MobileLayout";
-import {BilibiliVideo, LOCAL_URL, MainTexts, Title1} from "../../../components/utils";
+import {LOCAL_URL, MainTexts, Title1} from "../../../components/utils";
 import styles from "../../../styles/works.module.scss";
 import MobileContent from "../../../components/MobileContent";
 import Head from "next/head";
@@ -80,9 +80,6 @@ const WorkDetail: NextPage = ({
                     <article className={styles.content}>
                         <MobileContent content={content}/>
                     </article>
-                    <div className={styles.video} style={{display: videourl === null ? "none" : "block"}}>
-                        <BilibiliVideo bv={videourl}/>
-                    </div>
                     <Like
                         likeTimes={likeTimes}
                         handleLike={() => {

@@ -5,7 +5,7 @@ import {
 } from "next";
 import Image from "next/image";
 import MobileLayout from "../../../components/MobileLayout";
-import {ArticleTitle, BilibiliVideo, LOCAL_URL, MainTexts, MainTextsW, Title1} from "../../../components/utils";
+import {ArticleTitle, LOCAL_URL, MainTexts, MainTextsW, Title1} from "../../../components/utils";
 import styles from "../../../styles/graduaexhibition.module.scss";
 import MobileContent from "../../../components/MobileContent";
 import Head from "next/head";
